@@ -8,7 +8,8 @@ const HomeScreen = () => {
                 <Navbar bg="light" expand="lg" collapseOnSelect>
                     <Container>
                         <Navbar.Brand href="#home">
-                            <Image src={window.location.origin + '/images/heian-logo.svg'}/>      Heian Canada Inc.
+                            <Image className="logo" src={window.location.origin + '/images/heian-logo.svg'}/>
+                            <span className="bold">&nbsp;&nbsp;Heian Canada Inc.</span>
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
@@ -22,7 +23,7 @@ const HomeScreen = () => {
                     </Container>
                 </Navbar>
 
-                <Jumbotron className="jumbtron">
+                <Jumbotron className="jumbotron">
                         <h1>Hello, world!</h1>
                         <p  style={{width: '325px',}}>
                             This is a simple hero unit, a simple jumbotron-style component for calling
