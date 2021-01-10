@@ -1,9 +1,68 @@
-.logo {
-  width: 80px;
+body{
+  font-family: 'Work Sans', sans-serif !important;
+}
+
+h2,h3,h4,h5,h6 {
+  letter-spacing: 1px !important;
+}
+
+.primary {
+  background-color: #458FFF !important;
 }
 
 .bold {
   font-weight: 700 !important;
+}
+
+.fw-normal {
+  font-weight: 400;
+}
+
+.fs-xl {
+  font-size: 3rem;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.text-no-transform {
+  text-transform: none;
+}
+
+.fs-normal {
+  font-size: 1rem;
+}
+
+.color-black {
+  color: black !important;
+}
+
+.row-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-cover {
+  object-fit: cover;
+}
+
+.price-before {
+  color: red;
+  text-decoration: line-through;
+}
+
+.logo {
+  width: 80px;
+}
+
+.navbar-link {
+  color: black !important;
+}
+
+.navbar-link:hover {
+  color: #458FFF !important;
 }
 
 .jumbotron {
@@ -12,7 +71,7 @@
   background-position: center;
   background-size: cover;
   position: relative;
-  height: 60vh;
+  height: 47vh;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -28,16 +87,8 @@
   font-size: 40px;
 }
 
-/*
-.jumbotron-layer {
-  background-color: rgba(0, 0, 0, 0.4);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-*/
-.primary {
-  background-color: #458FFF !important;
+.multiple-machine {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
 }
