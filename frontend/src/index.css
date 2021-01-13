@@ -1,3 +1,9 @@
+:root {
+  --primary-color: #458FFF;
+  --white: #fff;
+  --black: #000;
+}
+
 body{
   font-family: 'Work Sans', sans-serif !important;
 }
@@ -6,8 +12,24 @@ h2,h3,h4,h5,h6 {
   letter-spacing: 1px !important;
 }
 
-.primary {
-  background-color: #458FFF !important;
+.primary-color {
+  background-color: var(--primary-color) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.btn-primary:hover {
+  filter: brightness(85%);
+}
+
+.txt-white {
+  color: var(--white);
+}
+
+.cap {
+  text-transform: capitalize;
 }
 
 .bold {
@@ -15,7 +37,7 @@ h2,h3,h4,h5,h6 {
 }
 
 .fw-normal {
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 
 .fs-xl {
@@ -61,12 +83,12 @@ h2,h3,h4,h5,h6 {
   color: black !important;
 }
 
-.navbar-link:hover {
+.navbar-link:hover, .navbar-link:active {
   color: #458FFF !important;
 }
 
 .jumbotron {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('http://localhost:3000/images/hero-image-machine.svg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('http://localhost:3000/images/hero-image-machine.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -87,8 +109,71 @@ h2,h3,h4,h5,h6 {
   font-size: 40px;
 }
 
-.multiple-machine {
+footer {
+  margin-top: 10rem;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.footer-container {
+  height: 30vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding-top: 3.5rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.footer-nav {
   display: flex;
   flex-direction: column;
-  width: 350px;
+}
+
+.footer-link {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.footer-link:hover {
+  color: var(--primary-color);
+}
+
+.multiple-machine {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  flex-direction: column;
+}
+
+.sale-machine {
+  position: relative;
+}
+
+.sale-badge {
+  position: absolute;
+  font-size: 16px !important;
+  top: 3%;
+  right: 3%;
+  text-transform: uppercase;
+  border-radius: 6px;
+  padding: 15px 10px !important;
+  width: 150px;
+}
+
+.testimonial-slider {
+  margin-top: 10rem;
+  text-align: center;
+  height: 40vh;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-inner {
+  margin-top: 7rem;
+  color: var(--white) !important;
+  font-size: 23px;
+  font-weight: 500;
+  text-transform: none;
 }

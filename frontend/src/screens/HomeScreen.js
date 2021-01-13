@@ -1,7 +1,5 @@
 import React from 'react'
 import { 
-    Navbar, 
-    Nav, 
     Container, 
     Row, 
     Col, 
@@ -11,39 +9,32 @@ import {
     Card,
     Form,
     FormGroup,
+    Badge,
+    Carousel
 } from 'react-bootstrap'
-import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel'
-import '@brainhubeu/react-carousel/lib/style.css';
+import { LinkContainer } from 'react-router-bootstrap'
+import Carousel2 from 'react-grid-carousel'
+import Navibar from '../components/Navibar'
+import Footer from '../components/Footer'
 
 const HomeScreen = () => {
     return (
         <>
             <header>
-                <Navbar style={{width: '100%'}} bg="light" expand="lg" collapseOnSelect>
-                    <Navbar.Brand href="#home" className="ml-3">
-                        <Image className="logo" src={window.location.origin + '/images/heian-logo.svg'}/>
-                        <span className="bold">&nbsp;&nbsp;Heian Canada Inc.</span>
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ml-auto mr-3">
-                            <Nav.Link className="navbar-link fs-normal text-no-transform" href="#">New Machinery</Nav.Link>
-                            <Nav.Link className="navbar-link fs-normal text-no-transform" href="#">Used Machinery</Nav.Link>
-                            <Nav.Link className="navbar-link fs-normal text-no-transform" href="#">Services</Nav.Link>
-                            <Nav.Link className="navbar-link fs-normal text-no-transform" href="#">Contact</Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
+                <Navibar/>
 
                 <Jumbotron className="jumbotron">
-                        <h1>Hello, world!</h1>
+                        <h1>CNC Machinery & <br/>Laminating Presses </h1>
                         <p  style={{width: '26rem',}}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna 
-                        aliqua. Nunc sed augue lacus viverra vitae congue eu consequat.
+                        Heian Canada proudly offers market leading
+                         machinery for materials including wood, plastics, composites, 
+                         carbon fiber, glass, stone, and nonferrous 
+                         manufacturing need. Explore our new and used inventory today.
                         </p>
                         <p>
-                            <Button className="primary">Call to Action!</Button>
+                            <LinkContainer to="/new-machines">
+                                <Button className="primary">Shop Now</Button>
+                            </LinkContainer>
                         </p>
 
                 </Jumbotron>
@@ -77,7 +68,7 @@ const HomeScreen = () => {
                                         </FormGroup>
                                         <p>or</p>
                                         <Form.Group>
-                                            <Form.Control as="select">
+                                            <Form.Control as="select" style={{width: '18rem'}}>
                                                 <option>Filter By Brand</option>
                                             </Form.Control>
                                         </Form.Group>
@@ -118,7 +109,7 @@ const HomeScreen = () => {
                                             </Form.Control>
                                         </Form.Group>
                                         <Form.Group>
-                                            <Button style={{ width: '15rem'}} className="mt-1 primary" type="submit">Search</Button>
+                                            <Button style={{ width: '15rem'}} className="mt-1 btn-primary" type="submit">Search</Button>
                                         </Form.Group>
                                     </Form>
                                 </div>
@@ -126,8 +117,142 @@ const HomeScreen = () => {
                         </Col>
                     </Row>
                 </Container>
+
+                <Container style={{marginTop: '10rem'}}>
+                    <h2 className="text-no-transform">Featured Machines</h2>
+                    <Carousel2 cols={2} showDots loop mobileBreakpoint={[{
+                        breakpoint: 1000,
+                        cols: 1,
+                        rows: 1
+                    }]}>
+                        <Carousel2.Item key={1}>
+                            <div className="multiple-machine">
+                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
+                                <div className="ml-1 mt-2">
+                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
+                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
+                                </div>
+                            </div>
+                        </Carousel2.Item>
+                        <Carousel2.Item key={2}>
+                            <div className="multiple-machine">
+                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
+                                <div className="ml-1 mt-2">
+                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
+                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
+                                </div>
+                            </div>
+                        </Carousel2.Item>
+                        <Carousel2.Item key={3}>
+                            <div className="multiple-machine">
+                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
+                                <div className="ml-1 mt-2">
+                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
+                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
+                                </div>
+                            </div>
+                        </Carousel2.Item>
+                        <Carousel2.Item key={4}>
+                            <div className="multiple-machine">
+                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
+                                <div className="ml-1 mt-2">
+                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
+                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
+                                </div>
+                            </div>
+                        </Carousel2.Item>
+                        {/* 
+                        {products.map((val, i) => (
+                            <Carousel.Item key={i}>
+                            <Card>
+                                <img src={val.img} />
+                                <div>
+                                <Title>{val.title}</Title>
+                                <span>{val.specialPrice}</span>
+                                <span>{val.oriPrice}</span>
+                                </div>
+                                <Mask />
+                            </Card>
+                            </Carousel.Item>
+                         ))}
+                        */ }
+                    </Carousel2>
+                </Container>
+
+                <Container style={{marginTop: '10rem'}}>
+                    <h2 className="text-no-transform">Machines On Sale</h2>
+                    <Carousel2 cols={2} showDots loop mobileBreakpoint={[{
+                        breakpoint: 1000,
+                        cols: 1,
+                        rows: 1
+                    }]}>
+                        <Carousel2.Item key={1}>
+                            <div className="multiple-machine sale-machine">
+                                <Image src="https://via.placeholder.com/350" 
+                                       className="img-cover" 
+                                       rounded/>
+                                    <Badge variant="danger" className="sale-badge">Sale</Badge>
+                                <div className="ml-1 mt-2">
+                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
+                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
+                                </div>
+                            </div>
+                        </Carousel2.Item>
+                        <Carousel2.Item key={2}>
+                            <div className="multiple-machine sale-machine">
+                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
+                                <Badge variant="danger" className="sale-badge">Sale</Badge>
+                                <div className="ml-1 mt-2">
+                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
+                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
+                                </div>
+                            </div>
+                        </Carousel2.Item>
+                        <Carousel2.Item key={3}>
+                            <div className="multiple-machine sale-machine">
+                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
+                                <Badge variant="danger" className="sale-badge">Sale</Badge>
+                                <div className="ml-1 mt-2">
+                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
+                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
+                                </div>
+                            </div>
+                        </Carousel2.Item>
+                        <Carousel2.Item key={4}>
+                            <div className="multiple-machine sale-machine">
+                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
+                                <Badge variant="danger" className="sale-badge">Sale</Badge>
+                                <div className="ml-1 mt-2">
+                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
+                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
+                                </div>
+                            </div>
+                        </Carousel2.Item>
+                        {/* 
+                        {products.map((val, i) => (
+                            <Carousel.Item key={i}>
+                            <Card>
+                                <img src={val.img} />
+                                <div>
+                                <Title>{val.title}</Title>
+                                <span>{val.specialPrice}</span>
+                                <span>{val.oriPrice}</span>
+                                </div>
+                                <Mask />
+                            </Card>
+                            </Carousel.Item>
+                         ))}
+                        */ }
+                    </Carousel2>
+                </Container>
                 <Container style={{marginTop: '10rem'}}>
                     <Row class="row-flex-center">
+                        <Col sm={12} md={6} lg={6}>
+                            <Container style={{marginTop: '18rem', marginBottom: '5rem'}}>
+                                <h2 className="fs-xl">get in touch</h2>
+                                <h5 className="fw-normal text-no-transform">Whether you’re looking for a price, a specific machine, or just want to ask us something, we’re more than happy to help.</h5>
+                            </Container>
+                        </Col>
                         <Col sm={12} md={6} lg={6}>
                             <Card className="p-5">
                                 <Container>
@@ -155,93 +280,32 @@ const HomeScreen = () => {
                                             <Form.Label>Message</Form.Label>
                                             <Form.Control as="textarea" rows={8} />
                                         </Form.Group>
+                                        <Form.Group>
+                                            <Button style={{ width: '100%'}} className="mt-1 btn-primary" type="submit">Send Message</Button>
+                                        </Form.Group>
                                     </Form>
                                 </Container>
                             </Card>
                         </Col>
-                        <Col sm={12} md={6} lg={6}>
-                            <Container className="flex">
-                                <h2 className="fs-xl">get in touch with us for the best prices available</h2>
-                                <h5 className="fw-normal text-no-transform">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mauris vitae ultricies leo integer malesuada. Egestas fringilla phasellus faucibus scelerisque eleifend. Enim eu turpis egestas pretium. Scelerisque viverra mauris in aliquam sem. Vivamus at augue eget arcu dictum. Pharetra magna ac placerat vestibulum lectus mauris ultrices. Aliquam purus sit amet luctus venenatis lectus</h5>
-                            </Container>
-                        </Col>
+                        
                     </Row>
                 </Container>
-                <Container style={{marginTop: '10rem'}}>
-                    <h2 className="text-no-transform">Featured Machines</h2>
-                    <Carousel
-                        plugins={[
-                            'infinite',
-                            'arrows',
-                            {
-                            resolve: slidesToShowPlugin,
-                            options: {
-                            numberOfSlides: 2
-                            }
-                            },
-                        ]}>
-                        <div className="multiple-machine">
-                            <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                            <div className="ml-1 mt-2">
-                                <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                            </div>
-                        </div>
-                        <div className="multiple-machine">
-                            <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                            <div className="ml-1 mt-2">
-                                <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                            </div>
-                        </div>
-                        <div className="multiple-machine">
-                            <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                            <div className="ml-1 mt-2">
-                                <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                            </div>
-                        </div>
-                        <div className="multiple-machine">
-                            <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                            <div className="ml-1 mt-2">
-                                <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                            </div>
-                        </div>
-                    </Carousel>
-                    <Row className="mt-4">
-                        <Col sm={12} md={6} lg={6}>
-                            <div className="multiple-machine">
-                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                                <div className="ml-1 mt-2">
-                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                                </div>
-                            </div>
-                        </Col>
-                        <Col sm={12} md={6} lg={6}q>
-                            <div className="multiple-machine">
-                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                                <div className="ml-1 mt-2">
-                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
-                   
-                </Container>
+                    <div className="testimonial-slider">
+                        <Carousel style={{width: '100%'}}>
+                            <Carousel.Item>
+                               <p>First Slide</p>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <p>Second Slide</p>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <p>Third Slide</p>
+                            </Carousel.Item>
+                        </Carousel>
+                    </div>
             </main>
 
-            <footer style={{marginTop: '10rem'}}>
-                <Container>
-                    <Row>
-                        <Col className="text-center py-3">
-                            Copright &copy; Heian Canada Inc.
-                        </Col>
-                    </Row>
-                </Container>
-            </footer>
+            <Footer/>
         </>
     )
 }
