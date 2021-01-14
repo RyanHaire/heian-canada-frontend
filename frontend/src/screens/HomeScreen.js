@@ -1,11 +1,11 @@
 import React from 'react'
-import { 
-    Container, 
-    Row, 
-    Col, 
-    Image, 
-    Button, 
-    Jumbotron, 
+import {
+    Container,
+    Row,
+    Col,
+    Image,
+    Button,
+    Jumbotron,
     Card,
     Form,
     FormGroup,
@@ -25,10 +25,10 @@ const HomeScreen = () => {
 
                 <Jumbotron className="jumbotron">
                         <h1>CNC Machinery & <br/>Laminating Presses </h1>
-                        <p  style={{width: '26rem',}}>
+                        <p  className="fs-md" style={{width: '36rem',}}>
                         Heian Canada proudly offers market leading
-                         machinery for materials including wood, plastics, composites, 
-                         carbon fiber, glass, stone, and nonferrous 
+                         machinery for materials including wood, plastics, composites,
+                         carbon fiber, glass, stone, and nonferrous
                          manufacturing need. Explore our new and used inventory today.
                         </p>
                         <p>
@@ -51,19 +51,19 @@ const HomeScreen = () => {
                                 <div className="m-4">
                                     <h5 className="fw-normal italic text-no-transform">Quick Search</h5>
                                     <h2 className="text-no-transform">New Machinery</h2>
-                                    <p className="fw-normal">
-                                        Lorem ipsum dolor sit amet, 
-                                        consectetur adipiscing elit, 
-                                        sed do eiusmod tempor incididunt 
-                                        ut labore et dolore magna aliqua. 
-                                        Leo vel fringilla est ullamcorper 
+                                    <p className="fw-normal fw-md">
+                                        Lorem ipsum dolor sit amet,
+                                        consectetur adipiscing elit,
+                                        sed do eiusmod tempor incididunt
+                                        ut labore et dolore magna aliqua.
+                                        Leo vel fringilla est ullamcorper
                                         eget nulla.
                                     </p>
                                     <Form>
                                     <h3 className="text-no-transform">Filter By</h3>
                                         <FormGroup>
                                             <Form.Control as="select">
-                                                <option>Select Machine Type</option>   
+                                                <option>Select Machine Type</option>
                                             </Form.Control>
                                         </FormGroup>
                                         <p>or</p>
@@ -88,18 +88,18 @@ const HomeScreen = () => {
                                     <h5 className="fw-normal italic text-no-transform">Quick Search</h5>
                                     <h2 className="text-no-transform">New Machinery</h2>
                                     <p className="fw-normal">
-                                        Lorem ipsum dolor sit amet, 
-                                        consectetur adipiscing elit, 
-                                        sed do eiusmod tempor incididunt 
-                                        ut labore et dolore magna aliqua. 
-                                        Leo vel fringilla est ullamcorper 
+                                        Lorem ipsum dolor sit amet,
+                                        consectetur adipiscing elit,
+                                        sed do eiusmod tempor incididunt
+                                        ut labore et dolore magna aliqua.
+                                        Leo vel fringilla est ullamcorper
                                         eget nulla.
                                     </p>
                                     <Form>
                                     <h3 className="text-no-transform">Filter By</h3>
                                         <FormGroup>
                                             <Form.Control as="select">
-                                                <option>Select Machine Type</option>   
+                                                <option>Select Machine Type</option>
                                             </Form.Control>
                                         </FormGroup>
                                         <p>or</p>
@@ -161,7 +161,7 @@ const HomeScreen = () => {
                                 </div>
                             </div>
                         </Carousel2.Item>
-                        {/* 
+                        {/*
                         {products.map((val, i) => (
                             <Carousel.Item key={i}>
                             <Card>
@@ -188,8 +188,8 @@ const HomeScreen = () => {
                     }]}>
                         <Carousel2.Item key={1}>
                             <div className="multiple-machine sale-machine">
-                                <Image src="https://via.placeholder.com/350" 
-                                       className="img-cover" 
+                                <Image src="https://via.placeholder.com/350"
+                                       className="img-cover"
                                        rounded/>
                                     <Badge variant="danger" className="sale-badge">Sale</Badge>
                                 <div className="ml-1 mt-2">
@@ -228,7 +228,7 @@ const HomeScreen = () => {
                                 </div>
                             </div>
                         </Carousel2.Item>
-                        {/* 
+                        {/*
                         {products.map((val, i) => (
                             <Carousel.Item key={i}>
                             <Card>
@@ -287,7 +287,7 @@ const HomeScreen = () => {
                                 </Container>
                             </Card>
                         </Col>
-                        
+
                     </Row>
                 </Container>
                     <div className="testimonial-slider">
