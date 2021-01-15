@@ -102,7 +102,7 @@ h2,h3,h4,h5,h6 {
   flex-direction: column;
   align-items: left;
   justify-content: center;
-  padding: 4rem 0;
+  padding: 4rem 2rem !important;
 }
 
 .jumbotron p, h1 {
@@ -111,37 +111,7 @@ h2,h3,h4,h5,h6 {
 
 .jumbotron h1 {
   font-weight: 700;
-  font-size: 40px;
-}
-
-footer {
-  margin-top: 10rem;
-  background-color: var(--black);
-  color: var(--white);
-}
-
-.footer-container {
-  height: 30vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding-top: 3.5rem;
-  padding-left: 5rem;
-  padding-right: 5rem;
-}
-
-.footer-nav {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer-link {
-  color: var(--white);
-  font-weight: 500;
-}
-
-.footer-link:hover {
-  color: var(--primary-color);
+  font-size: 35px;
 }
 
 .multiple-machine {
@@ -149,6 +119,11 @@ footer {
   justify-content: center;
   align-self: center;
   flex-direction: column;
+}
+
+.card {
+  display: flex !important; 
+  justify-content: 'space-between';
 }
 
 .sale-machine {
@@ -181,4 +156,10 @@ footer {
   font-size: 23px;
   font-weight: 500;
   text-transform: none;
+}
+
+
+/* mobile screens */
+@media only screen and (max-width: 600px) {
+
 }

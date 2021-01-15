@@ -25,17 +25,15 @@ const HomeScreen = () => {
 
                 <Jumbotron className="jumbotron">
                         <h1>CNC Machinery & <br/>Laminating Presses </h1>
-                        <p  className="fs-md" style={{width: '36rem',}}>
+                        <p style={{width: '376px'}}>
                         Heian Canada proudly offers market leading
                          machinery for materials including wood, plastics, composites,
                          carbon fiber, glass, stone, and nonferrous
                          manufacturing need. Explore our new and used inventory today.
                         </p>
-                        <p>
-                            <LinkContainer to="/new-machines">
-                                <Button className="primary">Shop Now</Button>
-                            </LinkContainer>
-                        </p>
+                        <LinkContainer to="/new-machines" style={{width: '150px'}}>
+                            <Button className="primary">Shop Now</Button>
+                        </LinkContainer>
 
                 </Jumbotron>
             </header>
@@ -44,9 +42,9 @@ const HomeScreen = () => {
                 <Container style={{marginTop: '10rem'}}>
                     <Row>
                         <Col sm={12} md={12} lg={6} className="mb-4">
-                            <Card style={{width: '32rem', display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} className="pt-3">
-                                <div className="ml-4 mt-4">
-                                    <Image src="https://via.placeholder.com/100" roundedCircle/>
+                            <Card className="pt-3">
+                                <div className="ml-4 mt-4 text-center">
+                                    <Image src="https://via.placeholder.com/100" />
                                 </div>
                                 <div className="m-4">
                                     <h5 className="fw-normal italic text-no-transform">Quick Search</h5>
@@ -62,7 +60,7 @@ const HomeScreen = () => {
                                     <Form>
                                     <h3 className="text-no-transform">Filter By</h3>
                                         <FormGroup>
-                                            <Form.Control as="select">
+                                            <Form.Control as="select" style={{width: '18rem'}}>
                                                 <option>Select Machine Type</option>
                                             </Form.Control>
                                         </FormGroup>
@@ -80,9 +78,9 @@ const HomeScreen = () => {
                             </Card>
                         </Col>
                         <Col sm={12} md={12} lg={6} className="mb-4">
-                            <Card style={{width: '32rem', display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} className="pt-3">
-                                <div className="ml-4 mt-4">
-                                    <Image src="https://via.placeholder.com/100" roundedCircle/>
+                            <Card className="pt-3">
+                                <div className="ml-4 mt-4 text-center">
+                                    <Image src="https://via.placeholder.com/100"/>
                                 </div>
                                 <div className="m-4">
                                     <h5 className="fw-normal italic text-no-transform">Quick Search</h5>
@@ -121,7 +119,7 @@ const HomeScreen = () => {
                 <Container style={{marginTop: '10rem'}}>
                     <h2 className="text-no-transform">Featured Machines</h2>
                     <Carousel2 cols={2} showDots loop mobileBreakpoint={[{
-                        breakpoint: 1000,
+                        breakpoint: 600,
                         cols: 1,
                         rows: 1
                     }]}>
@@ -182,7 +180,7 @@ const HomeScreen = () => {
                 <Container style={{marginTop: '10rem'}}>
                     <h2 className="text-no-transform">Machines On Sale</h2>
                     <Carousel2 cols={2} showDots loop mobileBreakpoint={[{
-                        breakpoint: 1000,
+                        breakpoint: 600,
                         cols: 1,
                         rows: 1
                     }]}>

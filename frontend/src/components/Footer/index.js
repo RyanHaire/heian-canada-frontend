@@ -1,6 +1,7 @@
 import React from 'react'
 import { Nav, Image, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import './index.css'
 
 const Footer = () => {
     return (
@@ -23,14 +24,15 @@ const Footer = () => {
                      <LinkContainer to="/contact">
                          <Nav.Link className="footer-link fs-normal text-no-transform">Contact</Nav.Link>
                      </LinkContainer>
+                     <LinkContainer to="/">
+                        <Image className="footer-link mt-3" src={window.location.origin + '/images/heian-logo-white.svg'}/>
+                     </LinkContainer>
                  </Nav>
-                 <LinkContainer style={{marginLeft: '15px', marginTop: '10px'}} to="/">
-                     <Image src={window.location.origin + '/images/heian-logo-white.svg'}/>
-                 </LinkContainer>
+                 
             </div>
             <div>
-                 <h3 style={{width: '300px'}} className="txt-white cap fw-normal">Get In Touch With Us For A Quote!</h3>
-                 <LinkContainer to="/contact" style={{width:'300px'}}>
+                 <h3 style={{width: '300px'}} className="txt-white cap fw-normal footer-header">Get In Touch With Us For A Quote!</h3>
+                 <LinkContainer to="/contact" style={{width:'15rem'}}>
                      <Button  className="primary mt-3">Contact</Button>
                  </LinkContainer>
             </div>
