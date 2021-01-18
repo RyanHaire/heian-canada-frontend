@@ -25,7 +25,7 @@ const Footer = () => {
                          <Nav.Link className="footer-link fs-normal text-no-transform">Contact</Nav.Link>
                      </LinkContainer>
                      <LinkContainer to="/">
-                        <Image className="footer-link mt-3" src={window.location.origin + '/images/heian-logo-white.svg'}/>
+                        <Image className="footer-link mt-3 footer-logo" src={window.location.origin + '/images/heian-logo-white.svg'}/>
                      </LinkContainer>
                  </Nav>
                  

@@ -8,12 +8,12 @@ import './index.css'
 const CategoryNav = () => {
     return (
         <aside className="category-nav">
-            <h3>Categories</h3>
-            <Link to="#" className="d-block category-link">Wood Saw &rarr;</Link>
-            <Link to="#" className="d-block category-link">Wood Saw &rarr;</Link>
-            <Link to="#" className="d-block category-link">Wood Saw &rarr;</Link>
-            <Link to="#" className="d-block category-link">Wood Saw &rarr;</Link>
-            <Link to="#" className="d-block category-link">Wood Saw &rarr;</Link>
+           {/*<h3>Categories</h3> */} 
+            <Link to="#" className="d-block category-link">Wood Saw</Link>
+            <Link to="#" className="d-block category-link">Wood Saw</Link>
+            <Link to="#" className="d-block category-link">Wood Saw</Link>
+            <Link to="#" className="d-block category-link">Wood Saw</Link>
+            <Link to="#" className="d-block category-link">Wood Saw</Link>
         </aside>
     )
 }

@@ -5,6 +5,7 @@ import {
     Image
 } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import './index.css'
 
 const Navibar = () => {
     return (
@@ -18,19 +19,19 @@ const Navibar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto mr-3">
-                    <LinkContainer to="/">
-                        <Nav.Link className="navbar-link fs-normal text-no-transform">Home</Nav.Link>
+                    <LinkContainer to="/" exact activeClassName="nav-link-active">
+                        <Nav.Link className="navbar-link fs-normal text-no-transform" active="nav-link-active">Home</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="/new-machinery">
+                    <LinkContainer to="/new-machinery" activeClassName="nav-link-active">
                         <Nav.Link className="navbar-link fs-normal text-no-transform">New Machinery</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="/used-machinery">
+                    <LinkContainer to="/used-machinery" activeClassName="nav-link-active">
                         <Nav.Link className="navbar-link fs-normal text-no-transform">Used Machinery</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="/services">
+                    <LinkContainer to="/services" activeClassName="nav-link-active">
                         <Nav.Link className="navbar-link fs-normal text-no-transform">Services</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="/contact">
+                    <LinkContainer to="/contact" activeClassName="nav-link-active">
                         <Nav.Link className="navbar-link fs-normal text-no-transform">Contact</Nav.Link>
                     </LinkContainer>
                 </Nav>

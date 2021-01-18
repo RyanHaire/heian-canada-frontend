@@ -1,10 +1,11 @@
-import HomeScreen from './screens/HomeScreen';
-import NewMachineryScreen from './screens/NewMachineryScreen';
-import UsedMachineryScreen from './screens/UsedMachineryScreen';
-import ServicesScreen from './screens/ServicesScreen';
-import ContactScreen from './screens/ContactScreen';
+import HomeScreen from './screens/HomeScreen'
+import NewMachineryScreen from './screens/NewMachineryScreen'
+import UsedMachineryScreen from './screens/UsedMachineryScreen'
+import ServicesScreen from './screens/ServicesScreen'
+import ContactScreen from './screens/ContactScreen'
+import ProductScreen from './screens/ProductScreen'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
 function App() {
@@ -19,9 +20,13 @@ function App() {
           <NewMachineryScreen/>
         </Route>
 
+        <Route path="/new-machinery/:id" component={ProductScreen}/>
+
         <Route exact path="/used-machinery">
           <UsedMachineryScreen/>
         </Route>
+
+        <Route path="/used-machinery/:id" component={ProductScreen}/>
 
         <Route exact path="/services">
           <ServicesScreen/>
