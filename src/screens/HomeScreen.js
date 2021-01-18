@@ -9,13 +9,13 @@ import {
     Card,
     Form,
     FormGroup,
-    Badge,
     Carousel
 } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import Carousel2 from 'react-grid-carousel'
 import Navibar from '../components/Navibar'
 import Footer from '../components/Footer'
+import Product from '../components/Product'
 
 const HomeScreen = () => {
     return (
@@ -124,40 +124,32 @@ const HomeScreen = () => {
                         rows: 1
                     }]}>
                         <Carousel2.Item key={1}>
-                            <div className="multiple-machine">
-                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                                <div className="ml-1 mt-2">
-                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                                </div>
-                            </div>
+                            <Product 
+                                img="https://via.placeholder.com/350" 
+                                title="Heian HR Twin Table" 
+                                priceNew="55,000" onSale={false}
+                            />
                         </Carousel2.Item>
                         <Carousel2.Item key={2}>
-                            <div className="multiple-machine">
-                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                                <div className="ml-1 mt-2">
-                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                                </div>
-                            </div>
+                            <Product 
+                                    img="https://via.placeholder.com/350" 
+                                    title="Heian HR Twin Table" 
+                                    priceNew="55,000" onSale={false}
+                                />
                         </Carousel2.Item>
                         <Carousel2.Item key={3}>
-                            <div className="multiple-machine">
-                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                                <div className="ml-1 mt-2">
-                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                                </div>
-                            </div>
+                            <Product 
+                                    img="https://via.placeholder.com/350" 
+                                    title="Heian HR Twin Table" 
+                                    priceNew="55,000" onSale={false}
+                                />
                         </Carousel2.Item>
                         <Carousel2.Item key={4}>
-                            <div className="multiple-machine">
-                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                                <div className="ml-1 mt-2">
-                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                                </div>
-                            </div>
+                            <Product 
+                                    img="https://via.placeholder.com/350" 
+                                    title="Heian HR Twin Table" 
+                                    priceNew="55,000" onSale={false}
+                                />
                         </Carousel2.Item>
                         {/*
                         {products.map((val, i) => (
@@ -185,46 +177,40 @@ const HomeScreen = () => {
                         rows: 1
                     }]}>
                         <Carousel2.Item key={1}>
-                            <div className="multiple-machine sale-machine">
-                                <Image src="https://via.placeholder.com/350"
-                                       className="img-cover"
-                                       rounded/>
-                                    <Badge variant="danger" className="sale-badge">Sale</Badge>
-                                <div className="ml-1 mt-2">
-                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                                </div>
-                            </div>
+                            <Product 
+                                img="https://via.placeholder.com/350" 
+                                title="Heian HR Twin Table" 
+                                priceNew="75,000" 
+                                priceUsed="55,000"
+                                onSale={true}
+                            />
                         </Carousel2.Item>
                         <Carousel2.Item key={2}>
-                            <div className="multiple-machine sale-machine">
-                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                                <Badge variant="danger" className="sale-badge">Sale</Badge>
-                                <div className="ml-1 mt-2">
-                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                                </div>
-                            </div>
+                        <Product 
+                                img="https://via.placeholder.com/350" 
+                                title="Heian HR Twin Table" 
+                                priceNew="75,000" 
+                                priceUsed="55,000"
+                                onSale={true}
+                            />
                         </Carousel2.Item>
                         <Carousel2.Item key={3}>
-                            <div className="multiple-machine sale-machine">
-                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                                <Badge variant="danger" className="sale-badge">Sale</Badge>
-                                <div className="ml-1 mt-2">
-                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                                </div>
-                            </div>
+                        <Product 
+                                img="https://via.placeholder.com/350" 
+                                title="Heian HR Twin Table" 
+                                priceNew="75,000" 
+                                priceUsed="55,000"
+                                onSale={true}
+                            />
                         </Carousel2.Item>
                         <Carousel2.Item key={4}>
-                            <div className="multiple-machine sale-machine">
-                                <Image src="https://via.placeholder.com/350" className="img-cover" rounded/>
-                                <Badge variant="danger" className="sale-badge">Sale</Badge>
-                                <div className="ml-1 mt-2">
-                                    <h3 className="text-no-transform">Heian HR Twin Table</h3>
-                                    <h4 className="text-no-transform">Price: $55,000.00 <span className="price-before">$75,000.00</span></h4>
-                                </div>
-                            </div>
+                        <Product 
+                                img="https://via.placeholder.com/350" 
+                                title="Heian HR Twin Table" 
+                                priceNew="75,000" 
+                                priceUsed="55,000"
+                                onSale={true}
+                            />
                         </Carousel2.Item>
                         {/*
                         {products.map((val, i) => (
