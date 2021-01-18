@@ -1,0 +1,136 @@
+:root {
+  --primary-color: #458FFF;
+  --white: #fff;
+  --black: #000;
+}
+
+body{
+  font-family: 'Work Sans', sans-serif !important;
+}
+
+h2,h3,h4,h5,h6 {
+  letter-spacing: 1px !important;
+}
+
+.primary-color {
+  background-color: var(--primary-color) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.btn-primary:hover {
+  filter: brightness(85%);
+}
+
+.txt-white {
+  color: var(--white);
+}
+
+.w-lg {
+  width: 15rem !important; 
+}
+.cap {
+  text-transform: capitalize;
+}
+
+.bold {
+  font-weight: 700 !important;
+}
+
+.fs-md {
+  font-size: 1.5rem;
+}
+
+.fw-normal {
+  font-weight: 400 !important;
+}
+
+.fs-xl {
+  font-size: 3rem;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.text-no-transform {
+  text-transform: none;
+}
+
+.fs-normal {
+  font-size: 1rem;
+}
+
+.color-black {
+  color: black !important;
+}
+
+.row-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-cover {
+  object-fit: cover;
+}
+
+.jumbotron {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('http://localhost:3000/images/hero-image-machine.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  height: 47vh;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  padding: 4rem 2rem !important;
+}
+
+.jumbotron p, h1 {
+  color: #fff !important;
+}
+
+.jumbotron h1 {
+  font-weight: 700;
+  font-size: 35px;
+}
+
+.card {
+  display: flex !important; 
+  justify-content: 'space-between';
+}
+
+.testimonial-slider {
+  margin-top: 10rem;
+  text-align: center;
+  height: 40vh;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-inner {
+  margin-top: 7rem;
+  color: var(--white) !important;
+  font-size: 23px;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.image-gallery {
+  width: 500px;
+}
+
+.product-heading {
+  color: black !important;
+}
+
+/* mobile screens */
+@media only screen and (max-width: 600px) {
+
+}

@@ -1,0 +1,66 @@
+.multiple-machine {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    flex-direction: column;
+}
+
+.multiple-machine-img:hover {
+}
+
+.multiple-machine-img-wrap:hover .multiple-machine-img-btn  {
+    visibility: visible;
+}
+
+.multiple-machine-img-wrap:hover .multiple-machine-img {
+    filter: brightness(85%);
+}
+
+.multiple-machine-img-btn {
+    background: var(--white);
+    padding: 15px 25px;
+    visibility: hidden;
+    color: var(--black) !important;
+    position: absolute;
+    top: 36%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all;
+    border-radius: 5px;
+}
+
+.multiple-machine-img-btn:hover {
+    text-decoration: none !important;
+}
+
+.multiple-machine-img-btn:focus {
+    filter: brightness(90%);
+}
+  
+.sale-machine {
+    position: relative;
+}
+  
+.sale-badge {
+    position: absolute;
+    font-size: 16px !important;
+    top: 3%;
+    right: 3%;
+    text-transform: uppercase;
+    border-radius: 6px;
+    padding: 15px 10px !important;
+    width: 150px;
+}
+
+.price-before {
+    color: red;
+    text-decoration: line-through;
+}
+
+.machine-link {
+    color: var(--black);
+}
+
+.machine-link:hover {
+    text-decoration: none;
+}
