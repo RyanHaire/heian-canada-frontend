@@ -4,9 +4,9 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
 import './index.css'
 
-const Product = ({img, title, priceNew, priceUsed, onSale, className}) => {
+const Product = ({img, title, priceNew, priceUsed, onSale, className, id}) => {
     return (
-        <Link to="/" className="machine-link">
+        <Link to={`${priceNew ? `/new-machine/${id}` : `/used-machine/${id}`}`} className="machine-link">
             <div className={className + " multiple-machine sale-machine"}>
                 <div className="multiple-machine-img-wrap">
                     <Image src={img}
@@ -24,7 +24,11 @@ const Product = ({img, title, priceNew, priceUsed, onSale, className}) => {
                     <h3 className="text-no-transform">{title}</h3>
                     <h5 className="text-no-transform">
                         {priceUsed !== undefined &&<span>Price: ${priceUsed} </span>} 
-                        <span className={ onSale ? 'price-before'  :  ''}>{!onSale && priceNew !== undefined && <span>Price: $</span>}{priceNew}</span>
+                        <span className={ onSale ? 'price-before'  :  ''}>
+                            {!onSale && priceNew !== undefined && 
+                            <span>Price: $</span>}
+                            {priceNew}
+                        </span>
                     </h5>
                 </div>
             </div>

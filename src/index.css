@@ -2,6 +2,8 @@
   --primary-color: #458FFF;
   --white: #fff;
   --black: #000;
+  --color-green: forestgreen;
+  --color-red: crimson;
 }
 
 body{
@@ -55,6 +57,14 @@ h2,h3,h4,h5,h6 {
   font-style: italic;
 }
 
+.grid {
+  display: grid;
+}
+
+.two-columns {
+  grid-template-columns: 1fr 1fr;
+}
+
 .text-no-transform {
   text-transform: none;
 }
@@ -77,10 +87,24 @@ h2,h3,h4,h5,h6 {
   object-fit: cover;
 }
 
+.hidden {
+  height: 0 !important;
+}
+
+.d-none {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: visibility 2.5s linear 2.5s, opacity 2.5s;
+}
+
+/* Index and Global Styles */
+
 .jumbotron {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('http://localhost:3000/images/hero-image-machine.svg');
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
   background-size: cover;
   position: relative;
   height: 47vh;
@@ -89,10 +113,15 @@ h2,h3,h4,h5,h6 {
   align-items: left;
   justify-content: center;
   padding: 4rem 2rem !important;
+  transition: height 2s;
 }
 
-.jumbotron p, h1 {
+.jumbotron p, .jumbotron h1 {
   color: #fff !important;
+  visibility: visibile !important;
+  opacity: 1 !important;
+  transition: all 2.5s ease-in !important;
+  transition: visibility 2.5s linear 2.5ms, opacity 2.5ms !important;
 }
 
 .jumbotron h1 {
@@ -122,15 +151,94 @@ h2,h3,h4,h5,h6 {
   text-transform: none;
 }
 
+/* Product Screen Styles */
+
 .image-gallery {
-  width: 500px;
+  width: 50%;
+}
+
+.carousel .slide {
+  width: 500px !important;
+}
+
+.carousel .slide img {
+  object-fit: cover !important;
+}
+
+.thumbs-wrapper {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+ul.thumbs.animated {
+  padding-left: 0;
 }
 
 .product-heading {
   color: black !important;
 }
 
+.call-for-pricing {
+  display: block;
+  border: 1px solid var(--primary-color);
+  width: 200px;
+  line-height: inherit;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none !important;
+  transition: all 0.2s;
+}
+
+.call-for-pricing:hover {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.call-for-pricing:focus {
+  filter: brightness(85%);
+}
+
+.product-price {
+  color: var(--color-green);
+}
+
+.product-price-new {
+  color: var(--color-red);
+  text-decoration: line-through;
+}
+
+.product-info-left {
+  font-size: 18px;
+  font-weight: 700;
+}
+.product-info-header {
+  background: var(--primary-color);
+  color: white;
+  padding: .7rem 15px;
+}
+
+/* Login Screen */
+.login-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.login-screen-form {
+  width: 400px;
+}
+
+/* Media Queries */
 /* mobile screens */
 @media only screen and (max-width: 600px) {
 
+}
+
+@media only screen and (max-device-width: 1366px) {
+  .jumbotron {
+    background-attachment: scroll;
+  }
 }

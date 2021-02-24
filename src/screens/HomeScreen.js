@@ -58,7 +58,7 @@ const HomeScreen = () => {
                                         eget nulla.
                                     </p>
                                     <Form>
-                                    <h3 className="text-no-transform">Filter By</h3>
+                                        <h3 className="text-no-transform">Filter By</h3>
                                         <FormGroup>
                                             <Form.Control as="select" style={{width: '18rem'}}>
                                                 <option>Select Machine Type</option>
@@ -94,7 +94,7 @@ const HomeScreen = () => {
                                         eget nulla.
                                     </p>
                                     <Form>
-                                    <h3 className="text-no-transform">Filter By</h3>
+                                        <h3 className="text-no-transform">Filter By</h3>
                                         <FormGroup>
                                             <Form.Control as="select">
                                                 <option>Select Machine Type</option>

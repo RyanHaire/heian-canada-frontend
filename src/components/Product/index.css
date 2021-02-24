@@ -5,6 +5,10 @@
     flex-direction: column;
 }
 
+.multiple-machine-img {
+    width: 100%;
+}
+
 .multiple-machine-img:hover {
 }
 
