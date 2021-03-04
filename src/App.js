@@ -4,10 +4,9 @@ import {
   Switch, 
   Route
 } from 'react-router-dom'
-import { Provider } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
 
 import HomeScreen from './screens/HomeScreen'
 import NewMachineryScreen from './screens/NewMachineryScreen'
@@ -18,27 +17,27 @@ import ProductScreen from './screens/ProductScreen'
 import LoginScreen from './screens/LoginScreen'
 import AdminDashboardScreen from './screens/AdminDashboardScreen'
 
-import { store } from './store'
+
 import { loadUser } from './actions/auth'
-import setAuthToken from './utils/setAuthToken'
+import setAuthToken  from './utility/setAuthToken'
 
 if(localStorage.token) {
   setAuthToken(localStorage.token)
 }
 
 const App = () => {
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    store.dispatch(loadUser())
-  }, [])
+    dispatch(loadUser())
+  }, [dispatch])
 
   return (
-    <Provider store={store}>
       <Router>
           <Switch>
             <Route exact path="/" component={HomeScreen}/>
-            <Route exact path="/admin-login" component={LoginScreen}/>
-            <Route exact path="/admin-dashboard" component={AdminDashboardScreen}/>
+            <Route exact path="/admin/login" component={LoginScreen}/>
+            <Route exact path="/admin/dashboard" component={AdminDashboardScreen}/>
             <Route exact path="/new-machinery" component={NewMachineryScreen}/>
             <Route exact path="/new-machinery/:id" component={ProductScreen}/>
             <Route exact path="/used-machinery" component={UsedMachineryScreen}/>
@@ -47,8 +46,6 @@ const App = () => {
             <Route exact path="/contact" component={ContactScreen}/>
           </Switch>
         </Router>
-    </Provider>
-   
   );
 }
 

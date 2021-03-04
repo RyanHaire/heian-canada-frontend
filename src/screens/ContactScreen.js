@@ -1,6 +1,7 @@
 import React from 'react'
 import Footer from '../components/Footer'
 import Navibar from '../components/Navibar'
+import Contact from '../components/Contact'
 
 const ContactScreen = () => {
     return (
@@ -8,8 +9,10 @@ const ContactScreen = () => {
             <header>
                 <Navibar/>
             </header>
-            <main>
-
+            <main className="row-flex-center">
+                <div style={{marginTop: '50px'}}>
+                    <Contact/>
+                </div>
             </main>
             <Footer/>
         </>

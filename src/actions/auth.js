@@ -60,7 +60,7 @@ export const login = (email, password) => async dispatch => {
         if(errors) {
             errors.forEach(err => {
                 console.log(err.msg)
-                dispatch(setAlert(err.msg, 'danger'))
+                //dispatch(setAlert(err.msg, 'danger'))
             })
         }
 

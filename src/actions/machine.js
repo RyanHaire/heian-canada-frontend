@@ -62,7 +62,7 @@ export const fetchUsedMachines = () => async dispatch => {
         const errors = error.response.data.errors
 
         if(errors) {
-            errors.forEach(err => dispatch(setAlert(err.msg, 'danger')))
+            //errors.forEach(err => dispatch(setAlert(err.msg, 'danger')))
         }
 
         dispatch({

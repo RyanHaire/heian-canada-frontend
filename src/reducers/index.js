@@ -6,7 +6,6 @@ import machine from './machine'
 import region from './region'
 
 export default combineReducers({
-    alert,
     auth,
     machineTypes,
     machine,
