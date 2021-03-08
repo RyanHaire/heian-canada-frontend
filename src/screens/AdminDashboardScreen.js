@@ -83,8 +83,6 @@ const AdminDashboardScreen = () => {
                     </p>
                 }
             </main>
-            <Footer/>
-            
         </>
     )
 }
