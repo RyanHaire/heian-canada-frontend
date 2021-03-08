@@ -40,7 +40,7 @@ const SelectField = styled.select`
     margin-bottom: 10px;
 `
 
-const AdminCreateMachine = () => {
+const AdminCreateMachine = (props) => {
     const [uploadedImages, setUploadedImages] = useState(0)
     const [editorState, setEditorState] = useState(RichTextEditor.createEmptyValue())
     const [inputList, setInputList] = useState([{name: '', details: ''}])
@@ -89,6 +89,10 @@ const AdminCreateMachine = () => {
         setInputList([...inputList, { name: "", details: "" }]);
     };
 
+    const handleTEChange = (value) => {
+        setEditorState(value)
+    }
+
     const { 
         manufacturer,
         model,
@@ -103,7 +107,7 @@ const AdminCreateMachine = () => {
     } = formData
 
     const handleCreateMachine = () => {
-
+        //console.log(editorState.toString('html'))
     }
 
     return (
@@ -157,7 +161,7 @@ const AdminCreateMachine = () => {
                 })}
                 <InputContainer>
                     <Label>Addtional Description</Label>
-                    <RichTextEditor value={editorState} onChange={value => setEditorState(value)}/>
+                    <RichTextEditor value={editorState} onChange={handleTEChange}/>
                 </InputContainer>
                 <button onClick={() => handleCreateMachine()}>Create Machine</button> 
             </CreateMachineForm>
