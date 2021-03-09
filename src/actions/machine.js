@@ -79,7 +79,7 @@ export const fetchMachines = () => async dispatch => {
             type: FETCH_MACHINES_PENDING
         })
 
-        const res = await axios.get('http://localhost:5000/api/machine/all')
+        const res = await axios.get('http://localhost:5000/api/machine/all/machines')
 
         dispatch({
             type: FETCH_MACHINES_SUCCESS,

@@ -8,12 +8,12 @@ const AdminMachines = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        //dispatch(fetchMachines())
-    }, [])
+        dispatch(fetchMachines())
+    }, [dispatch])
     
     const [createPage, setCreatePage] = useState(0)
 
-    const machinesState = useSelector((state) => state.machine)
+    const machinesState = useSelector((state) => state.machine) || []
 
     const toggleView = (page) => {
         if(page === 'create') {
@@ -29,34 +29,39 @@ const AdminMachines = () => {
                 <button className="btn btn-primary mb-20 mt-20" onClick={() => toggleView('create')}>Create a New Machine</button>
             </div>
             <Table>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Price New</th>
-                    <th>Price Used</th>
-                    <th>Condition</th>
-                    <th>Actions</th>
-                </tr>
-               {/* Loop through machines */}
-
-               {machinesState.machines == []
-                ? 
-                    <div>No Machines</div>
-                  : 
-                 machinesState.machines.map((item) => 
+                <thead>
                     <tr>
-                        <td>{item.images[0]}</td>
-                        <td>{item.name}</td>
-                        <td>{item.price.new}</td>
-                        <td>{item.price.used}</td>
-                        <td>{`${item.condition.rating} - ${item.condition.description}`}</td>
-                        <td>
-                            <button className="btn btn-dark mr-3 w-25">Edit</button>
-                            <button className="btn btn-danger w-25">Delete</button>
-                        </td>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price New</th>
+                        <th>Price Used</th>
+                        <th>Condition</th>
+                        <th>Actions</th>
                     </tr>
-                )
-               }
+                </thead>
+              
+               {/* Loop through machines */}
+                <tbody>
+                    {machinesState === []
+                        ? 
+                            <div>No Machines</div>
+                        : 
+                        machinesState.machines.map((item) => 
+                            <tr>
+                                <td>{item.images[0]}</td>
+                                <td>{item.name}</td>
+                                <td>{item.price.new}</td>
+                                <td>{item.price.used}</td>
+                                <td>{`${item.condition.rating} - ${item.condition.description}`}</td>
+                                <td>
+                                    <button className="btn btn-dark mr-3 w-25">Edit</button>
+                                    <button className="btn btn-danger w-25">Delete</button>
+                                </td>
+                            </tr>
+                        )
+                    }
+                </tbody>
+              
             </Table>
         </div>}
         </main>

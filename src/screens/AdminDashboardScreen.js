@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Footer from '../components/Footer'
 import Navibar from '../components/Navibar'
 import AdminMachines from '../components/AdminMachines/AdminMachines'
 import AdminMachineTypes from '../components/AdminMachineTypes/AdminMachineTypes'

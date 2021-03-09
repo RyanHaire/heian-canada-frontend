@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Input from '../Input'
 import RichTextEditor from 'react-rte'
+import { createMachine } from '../../actions/machine'
+import { fetchMachineTypes } from '../../actions/machinesTypes'
+import { fetchRegions } from '../../actions/regions'
 
 const InputContainer = styled.div`
     display: flex;
@@ -41,6 +45,19 @@ const SelectField = styled.select`
 `
 
 const AdminCreateMachine = (props) => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        // fetch regions
+        dispatch(fetchRegions())
+        
+        // fetch machine types
+        dispatch(fetchMachineTypes())
+    }, [])
+
+    const machineTypeState = useSelector((state) => state.machineTypes) || []
+    const regionState = useSelector((state) => state.region) || []
+
     const [uploadedImages, setUploadedImages] = useState(0)
     const [editorState, setEditorState] = useState(RichTextEditor.createEmptyValue())
     const [inputList, setInputList] = useState([{name: '', details: ''}])
@@ -137,14 +154,18 @@ const AdminCreateMachine = (props) => {
                 <InputContainer>
                     <Label htmlFor="machine-type">Machine Type</Label>
                     <SelectField id="machine-type" name="machineType" value={machineType} onChange={e => onChange(e)}>
-                        <option>Saw</option>
+                        {machineTypeState !== [] ? machineTypeState.machineTypes.map((machineType) => {
+                            return (<option value={machineType.name}>{machineType.name}</option>)
+                        }) : <option value="NA">No Machine Types Available</option>}
                     </SelectField>
                 </InputContainer>
                 <InputContainer>
                     <Label htmlFor="region">Region</Label>
                     <SelectField id="region" name="region" value={region} onChange={e => onChange(e)}>
-                        <option>East</option>
-                    </SelectField>
+                        {regionState.regions !== []? regionState.regions.map((region) => {
+                            <option value={region.name}>{region.name}</option>
+                        }) : <option value="NA">No Regions Available</option>}
+                    </SelectField> 
                 </InputContainer>
                 {inputList.map((x, i) => {
                     return (<InputContainer key={i}>

@@ -3,6 +3,9 @@ import {
     FETCH_REGIONS_PENDING,
     FETCH_REGIONS_SUCCESS,
     FETCH_REGIONS_FAIL,
+    FETCH_REGION_PENDING,
+    FETCH_REGION_SUCCESS,
+    FETCH_REGION_FAIL,
     CREATE_REGION_PENDING,
     CREATE_REGION_SUCCESS,
     CREATE_REGION_FAIL,
@@ -22,7 +25,7 @@ export const fetchRegions = () => async dispatch => {
             type: FETCH_REGIONS_PENDING
         })
 
-        const res = await axios.get('http://localhost:5000/api/regions/all')
+        const res = await axios.get('http://localhost:5000/api/region/all/regions')
 
         dispatch({
             type: FETCH_REGIONS_SUCCESS,
@@ -31,7 +34,11 @@ export const fetchRegions = () => async dispatch => {
 
     } catch (error) {
         console.error(error.response)
-        const errors = error.response.data.errors
+        var errors = []
+        if(error.response.data) {
+            errors = error.response.data.errors
+        }
+        
 
         if(errors) {
             errors.forEach(err => dispatch(setAlert(err.msg, 'danger')))
@@ -47,7 +54,7 @@ export const fetchRegions = () => async dispatch => {
 export const fetchRegion = id => async dispatch => {
     try {
         dispatch({
-            type: FETCH_MACHINE_PENDING
+            type: FETCH_REGION_PENDING
         })
 
         const res = await axios.get(`http://localhost:5000/api/region/${id}`)

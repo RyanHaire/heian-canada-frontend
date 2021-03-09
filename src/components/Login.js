@@ -1,6 +1,9 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { login } from '../actions/auth'
+import Input from './Input'
 
 const LoginForm = styled.div`
     position: absolute;
@@ -13,25 +16,38 @@ const Login = () => {
     const dispatch = useDispatch()
 
     const [formData, setFormData] = useState({
-        username: '',
+        email: '',
         password: ''
     })
 
+    const userState = useSelector((state) => state.auth) || []
+
+    // useEffect(() => {
+    //     if(userState.user) {
+    //         history.push('/admin/dashboard')
+    //     }
+    // }, [])
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
 
-    const { username, password } = formData
+    const { email, password } = formData
 
     const handleLogin = () => {
-       // dispatch(login(username.trim(), password.trim()));
-        setFormData({username: '', password: ''})
+        dispatch(login(email.trim(), password.trim()));
+        setFormData({email: '', password: ''})
     }
 
     return (
-        <LoginForm>
-            <Input type="text" label="Username" placeholder="Username" name="username" value={username}handleChange={e => onChange(e)}/>
-            <Input label="Password" type="password" value={password} name="password" handleChange={e => onChange(e)}/>
-            <button onClick={() => handleLogin()}>Login</button>
-        </LoginForm>
+        <>
+        {userState.user === null ?  <LoginForm>
+            <Input type="text" label="Email" name="email" value={email} handleChange={e => onChange(e)}/>
+            <Input type="password" label="Password" name="password" value={password} handleChange={e => onChange(e)}/>
+            <button className="btn btn-primary w-100" onClick={() => handleLogin()}>Login</button>
+        </LoginForm> 
+        : 
+        <Redirect to="/admin/dashboard"/>
+        }
+    </>
+       
     )
 }
 

@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Table } from '../../elements/components/Table.js'
+import {fetchMachineTypes} from '../../actions/machinesTypes'
 
 const AdminMachineTypes = () => {
+    const dispatch = useDispatch()
 
-    const machineTypeState = useSelector((state) => state.machineTypes)
+    useEffect(() => {
+        dispatch(fetchMachineTypes())
+    }, [dispatch])
+    const machineTypeState = useSelector((state) => state.machineTypes) || []
 
     return (
         <div>
@@ -17,7 +22,7 @@ const AdminMachineTypes = () => {
                 </tr>
                {/* Loop through machines */}
 
-               {machineTypeState.machineTypes == [] 
+               {machineTypeState === [] 
                 ? <tr>
                     <td>No Machines</td>
                    </tr> : 
