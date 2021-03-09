@@ -39,6 +39,7 @@ const InputField = styled.input`
 const SelectField = styled.select`
     outline: none;
     border: 1px solid #D6D6D6;
+    background: white;
     padding: 10px 15px;
     border-radius: 8px;
     margin-bottom: 10px;
@@ -53,7 +54,7 @@ const AdminCreateMachine = (props) => {
         
         // fetch machine types
         dispatch(fetchMachineTypes())
-    }, [])
+    }, [dispatch])
 
     const machineTypeState = useSelector((state) => state.machineTypes) || []
     const regionState = useSelector((state) => state.region) || []
@@ -154,17 +155,21 @@ const AdminCreateMachine = (props) => {
                 <InputContainer>
                     <Label htmlFor="machine-type">Machine Type</Label>
                     <SelectField id="machine-type" name="machineType" value={machineType} onChange={e => onChange(e)}>
-                        {machineTypeState !== [] ? machineTypeState.machineTypes.map((machineType) => {
-                            return (<option value={machineType.name}>{machineType.name}</option>)
-                        }) : <option value="NA">No Machine Types Available</option>}
+                        {machineTypeState.machines === [] ?  
+                            machineTypeState.machineTypes.map((machineType, i) => {
+                                return (<option key={i} value={machineType.name}>{machineType.name}</option>)
+                        }) : 
+                            <option value="No Machine Types Available">No Machine Types Available</option>
+                        }
                     </SelectField>
                 </InputContainer>
                 <InputContainer>
                     <Label htmlFor="region">Region</Label>
                     <SelectField id="region" name="region" value={region} onChange={e => onChange(e)}>
-                        {regionState.regions !== []? regionState.regions.map((region) => {
-                            <option value={region.name}>{region.name}</option>
-                        }) : <option value="NA">No Regions Available</option>}
+                        <option value=""></option>
+                        {regionState.regions !== [] ? regionState.regions.map((region, i) => {
+                            return (<option key={i} value={region.name}>{region.name}</option>)
+                        }) : <option value="No Regions Available">No Regions Available</option>}
                     </SelectField> 
                 </InputContainer>
                 {inputList.map((x, i) => {
@@ -172,8 +177,8 @@ const AdminCreateMachine = (props) => {
                         <Label htmlFor={`description-${i}`}>
                             Description {`${i + 1}`} &nbsp;
                             <span className="btn-box">
-                                {inputList.length !== 1 && <button className="mr-10" onClick={() => handleRemoveClick(i)}>Remove</button>}
-                                {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
+                                {inputList.length !== 1 && <button className="btn btn-primary w-25 mr-10" onClick={() => handleRemoveClick(i)}>Remove</button>}
+                                {inputList.length - 1 === i && <button className="btn btn-primary w-25" onClick={handleAddClick}>Add</button>}
                             </span>
                         </Label>
                         <InputField type="text" name="name" placeholder="Name" value={x.name} onChange={e => handleInputChange(e, i)}/>

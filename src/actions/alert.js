@@ -4,7 +4,7 @@ import { SET_ALERT, REMOVE_ALERT} from '../constants'
 // action to set and remove alert 
 export const setAlert = (msg, alertType, timeout = 5000) => dispatch => {
     const id = uuidv4()
-    alert('hello world there is a an alert to set')
+    alert(msg)
     dispatch({
         type: SET_ALERT,
         payload: { msg, alertType, id}

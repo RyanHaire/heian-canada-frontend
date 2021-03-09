@@ -1,32 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import AdminCreateMachine from './AdminCreateMachine'
 import { Table } from '../../elements/components/Table.js'
 import { fetchMachines } from '../../actions/machine'
+import { useHistory } from 'react-router-dom'
 
 const AdminMachines = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(fetchMachines())
     }, [dispatch])
     
-    const [createPage, setCreatePage] = useState(0)
 
     const machinesState = useSelector((state) => state.machine) || []
 
-    const toggleView = (page) => {
-        if(page === 'create') {
-            setCreatePage(true)
-        }
+    const createMachinePage = () => {
+        history.push('/admin/dashboard/machines/create')    
     }
 
 
     return (
         <main className="vh-100">
-        { createPage ? <AdminCreateMachine/> : <div>
             <div className="text-center">
-                <button className="btn btn-primary mb-20 mt-20" onClick={() => toggleView('create')}>Create a New Machine</button>
+                <button className="btn btn-primary mb-20 mt-20" onClick={() => createMachinePage()}>Create a New Machine</button>
             </div>
             <Table>
                 <thead>
@@ -42,7 +39,7 @@ const AdminMachines = () => {
               
                {/* Loop through machines */}
                 <tbody>
-                    {machinesState === []
+                    {machinesState.machines === []
                         ? 
                             <div>No Machines</div>
                         : 
@@ -63,7 +60,6 @@ const AdminMachines = () => {
                 </tbody>
               
             </Table>
-        </div>}
         </main>
     )
 }

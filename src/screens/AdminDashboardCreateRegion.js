@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import AdminCreateRegion from '../components/AdminRegions/AdminCreateRegion'
 import Navibar from '../components/Navibar'
-import AdminDashboard from '../components/AdminDashboard'
 import Alert from '../components/Alert'
 
-
-const AdminDashboardScreen = () => {
+const AdminDashboardCreateRegion = () => {
     return (
         <>
             <header>
@@ -19,10 +18,10 @@ const AdminDashboardScreen = () => {
                     <Link className="btn btn-primary mr-20" to="/admin/dashboard/machinetypes">Machine Types</Link>
                     <Link className="btn btn-primary mr-20" to="/admin/dashboard/regions">Regions</Link>
                 </nav>
-                <AdminDashboard/>
+                <AdminCreateRegion/>
             </main>
         </>
     )
 }
 
-export default AdminDashboardScreen
+export default AdminDashboardCreateRegion

@@ -88,15 +88,17 @@ export const createRegion = formData => async dispatch => {
         type: CREATE_REGION_PENDING
     })
 
+    const json = JSON.stringify({ name: formData })
+
     try {
-        const res = await axios.put('http://localhost:5000/api/region', formData, config)
+        const res = await axios.post('http://localhost:5000/api/region/create', json, config)
 
         dispatch({
             type: CREATE_REGION_SUCCESS,
             payload: res.data
         })
 
-        dispatch(setAlert('Machine Created!', 'success'))
+        dispatch(setAlert('Region Created!', 'success'))
     } catch (error) {
         const errors = error.response.data.errors
         
@@ -111,7 +113,7 @@ export const createRegion = formData => async dispatch => {
 }
 
 // action to update a region
-export const updateRegion = (formData, id) => async dispatch => {
+export const updateRegion = (name, id) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -122,8 +124,10 @@ export const updateRegion = (formData, id) => async dispatch => {
         type: UPDATE_REGION_PENDING
     })
 
+    const json = JSON.stringify({ name: name})
+
     try {
-        const res = await axios.put(`http://localhost:5000/api/region/${id}`, formData, config)
+        const res = await axios.put(`http://localhost:5000/api/region/update/${id}`, json, config)
 
         dispatch({
             type: UPDATE_REGION_SUCCESS,

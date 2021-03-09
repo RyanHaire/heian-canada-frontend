@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Table } from '../../elements/components/Table.js'
-import {fetchMachineTypes} from '../../actions/machinesTypes'
+import {fetchMachineTypes, deleteMachineType } from '../../actions/machinesTypes'
 
 const AdminMachineTypes = () => {
     const dispatch = useDispatch()
@@ -9,33 +10,42 @@ const AdminMachineTypes = () => {
     useEffect(() => {
         dispatch(fetchMachineTypes())
     }, [dispatch])
+
     const machineTypeState = useSelector((state) => state.machineTypes) || []
 
+    const handleDeleteMachine = (id) => {
+        dispatch(deleteMachineType(id))
+        window.location.reload()
+    }
     return (
         <div>
             <div className="text-center">
-                <button className="btn btn-primary mb-20 mt-20">Create a New Machine Type</button>
+                <Link className="btn btn-primary mb-20 mt-20" to="/admin/dashboard/machinetypes/create">Create a New Machine Type</Link>
             </div>
             <Table>
-                <tr>
-                    <th>Name</th>
-                </tr>
-               {/* Loop through machines */}
-
-               {machineTypeState === [] 
-                ? <tr>
-                    <td>No Machines</td>
-                   </tr> : 
-                 machineTypeState.machineTypes.map((item) => 
+                <thead>
                     <tr>
-                        <td>{item.name}</td>
-                        <td>
-                            <button className="btn btn-dark mr-3 w-25">Edit</button>
-                            <button className="btn btn-danger w-25">Delete</button>
-                        </td>
+                        <th>Name</th>
+                        <th>Actions</th>
                     </tr>
-                )
-               }
+                </thead>
+               
+               {/* Loop through machines */}
+                <tbody>
+                    {machineTypeState.machineTypes === [] 
+                        ? <div>No Machine Types</div> : 
+                        machineTypeState.machineTypes.map((item) => 
+                            <tr key={item.name}>
+                                <td>{item.name}</td>
+                                <td>
+                                    <Link className="btn btn-dark mr-3 w-25" to={`/admin/dashboard/machinetypes/edit/${item._id}`}>Edit</Link>
+                                    <button className="btn btn-danger w-25" onClick={() => handleDeleteMachine(item._id)}>Delete</button>
+                                </td>
+                            </tr>
+                        )
+                    }
+                </tbody>
+              
               
                
             </Table>

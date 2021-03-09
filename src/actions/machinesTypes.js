@@ -73,7 +73,7 @@ export const fetchMachineType = id => async dispatch => {
 }
 
 // action to create a machine type
-export const createMachineType = formData => async dispatch => {
+export const createMachineType = name => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -84,8 +84,10 @@ export const createMachineType = formData => async dispatch => {
         type: CREATE_MACHINE_TYPE_PENDING
     })
 
+    const json = JSON.stringify({name: name})
+
     try {
-        const res = await axios.put('http://localhost:5000/api/machinetype', formData, config)
+        const res = await axios.post('http://localhost:5000/api/machinetype/create', json, config)
 
         dispatch({
             type: CREATE_MACHINE_TYPE_SUCCESS,
