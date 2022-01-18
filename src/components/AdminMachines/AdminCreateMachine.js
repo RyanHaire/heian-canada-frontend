@@ -72,18 +72,36 @@ const AdminCreateMachine = (props) => {
         priceNew: '',
         priceOld: '',
         machineType: '',
-        region: ''
+        region: '',
     })
+
+
 
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
     
-    const handleUploadedImages = (e) => {
+    const getBase64 = (file, cb) => {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            cb(reader.result)
+        };
+        reader.onerror = function (error) {
+            console.log('Error: ', error);
+        };
+    }
+
+    const handleUploadedImages = async (e) => {
+        console.log(e.target)
         if(e.target.files.length > 0) {
             const images = []
             for(let i =0; i < e.target.files.length; i++) {
-                images.push(URL.createObjectURL(e.target.files[i]))
+               await getBase64(e.target.files[i], (then) => {
+                    images.push(then)
+                    console.log("images length is now " + images.length)
+                })
             }
-            setUploadedImages(images)
+            console.log('setting images ' + images.length)
+            setUploadedImages(images) 
         }
     }
 
@@ -121,11 +139,13 @@ const AdminCreateMachine = (props) => {
         priceNew,
         priceOld,
         machineType, 
-        region 
+        region,
     } = formData
 
     const handleCreateMachine = () => {
-        //console.log(editorState.toString('html'))
+        dispatch(createMachine({...formData, images: uploadedImages, descriptions: inputList, additionalDescription: editorState}))
+        console.log(formData)
+        console.log(uploadedImages)
     }
 
     return (
@@ -187,7 +207,7 @@ const AdminCreateMachine = (props) => {
                 })}
                 <InputContainer>
                     <Label>Addtional Description</Label>
-                    <RichTextEditor value={editorState} onChange={handleTEChange}/>
+                    <RichTextEditor name="additionalDescription" value={editorState} onChange={handleTEChange}/>
                 </InputContainer>
                 <button onClick={() => handleCreateMachine()}>Create Machine</button> 
             </CreateMachineForm>

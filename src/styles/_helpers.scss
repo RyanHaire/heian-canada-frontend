@@ -1,0 +1,96 @@
+// helper classes
+
+.mt-20 {
+    margin-top: 20px !important;
+}
+
+.mb-20 {
+margin-bottom: 20px !important;
+}
+
+.mr-20 {
+margin-right: 20px;
+}
+
+.mr-10 {
+margin-right: 10px;
+}
+
+.mb-10 {
+margin-bottom: 10px !important;
+}
+
+.btn-primary:hover {
+filter: brightness(85%);
+}
+
+.txt-white {
+color: var(--white);
+}
+
+.w-lg {
+width: 15rem !important; 
+}
+.cap {
+text-transform: capitalize;
+}
+
+.bold {
+font-weight: 700 !important;
+}
+
+.fs-md {
+font-size: 1.5rem;
+}
+
+.fw-normal {
+font-weight: 400 !important;
+}
+
+.fs-xl {
+font-size: 3rem;
+}
+
+.italic {
+font-style: italic;
+}
+
+.grid {
+display: grid;
+}
+
+.two-columns {
+grid-template-columns: 1fr 1fr;
+}
+
+.text-no-transform {
+text-transform: none;
+}
+
+.fs-normal {
+font-size: 1rem;
+}
+
+.color-black {
+color: black !important;
+}
+
+.row-flex-center {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.img-cover {
+object-fit: cover;
+}
+
+.hidden {
+height: 0 !important;
+}
+
+.d-none {
+opacity: 0 !important;
+visibility: hidden !important;
+transition: visibility 2.5s linear 2.5s, opacity 2.5s;
+}

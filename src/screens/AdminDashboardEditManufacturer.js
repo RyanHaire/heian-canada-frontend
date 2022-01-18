@@ -1,11 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import AdminCreateMachineType from '../components/AdminMachineTypes/AdminCreateMachineType'
+import AdminEditManufacturer from '../components/AdminManufacturers/AdminEditManufacturer'
 import Navibar from '../components/Navibar'
 import AdminNavibar from '../components/AdminNavibar'
 import Alert from '../components/Alert'
 
-const AdminDashboardCreateMachineType = () => {
+const AdminDashboardEditManufacturer = (props) => {
     return (
         <>
             <header>
@@ -14,10 +13,10 @@ const AdminDashboardCreateMachineType = () => {
             <main>
                 <Alert/>
                 <AdminNavibar/>
-                <AdminCreateMachineType/>
+                <AdminEditManufacturer {...props}/>
             </main>
         </>
     )
 }
 
-export default AdminDashboardCreateMachineType
+export default AdminDashboardEditManufacturer

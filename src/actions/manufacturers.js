@@ -1,34 +1,34 @@
 import axios from 'axios'
 import {
-    FETCH_MACHINE_TYPES_PENDING,
-    FETCH_MACHINE_TYPES_SUCCESS,
-    FETCH_MACHINE_TYPES_FAIL,
-    FETCH_MACHINE_TYPE_PENDING,
-    FETCH_MACHINE_TYPE_SUCCESS,
-    FETCH_MACHINE_TYPE_FAIL,
-    CREATE_MACHINE_TYPE_PENDING,
-    CREATE_MACHINE_TYPE_SUCCESS,
-    CREATE_MACHINE_TYPE_FAIL,
-    UPDATE_MACHINE_TYPE_PENDING,
-    UPDATE_MACHINE_TYPE_SUCCESS,
-    UPDATE_MACHINE_TYPE_FAIL,
-    DELETE_MACHINE_TYPE_PENDING,
-    DELETE_MACHINE_TYPE_SUCCESS,
-    DELETE_MACHINE_TYPE_FAIL,
+    FETCH_MANUFACTURERS_PENDING,
+    FETCH_MANUFACTURERS_SUCCESS,
+    FETCH_MANUFACTURERS_FAIL,
+    FETCH_MANUFACTURER_PENDING,
+    FETCH_MANUFACTURER_SUCCESS,
+    FETCH_MANUFACTURER_FAIL,
+    CREATE_MANUFACTURER_PENDING,
+    CREATE_MANUFACTURER_SUCCESS,
+    CREATE_MANUFACTURER_FAIL,
+    UPDATE_MANUFACTURER_PENDING,
+    UPDATE_MANUFACTURER_SUCCESS,
+    UPDATE_MANUFACTURER_FAIL,
+    DELETE_MANUFACTURER_PENDING,
+    DELETE_MANUFACTURER_SUCCESS,
+    DELETE_MANUFACTURER_FAIL,
 } from '../constants'
 import { setAlert } from './alert'
 
 // action to get all machine types
-export const fetchMachineTypes = () => async dispatch => {
+export const fetchManufacturers = () => async dispatch => {
     try {
         dispatch({
-            type: FETCH_MACHINE_TYPES_PENDING,
+            type: FETCH_MANUFACTURERS_PENDING,
         })
 
-        const res = await axios.get('http://localhost:5000/api/machinetype/all')
+        const res = await axios.get('http://localhost:5000/api/manufacturer/all/manufacturers')
         
         dispatch({
-            type: FETCH_MACHINE_TYPES_SUCCESS,
+            type: FETCH_MANUFACTURERS_SUCCESS,
             payload: res.data
         })
         
@@ -41,22 +41,22 @@ export const fetchMachineTypes = () => async dispatch => {
         }
 
         dispatch({
-            type: FETCH_MACHINE_TYPES_FAIL
+            type: FETCH_MANUFACTURERS_FAIL
         })
     }
 }
 
 // action to get machine type by id
-export const fetchMachineType = id => async dispatch => {
+export const fetchManufacturer = id => async dispatch => {
     try {
         dispatch({
-            type: FETCH_MACHINE_TYPE_PENDING
+            type: FETCH_MANUFACTURER_PENDING
         })
 
-        const res = await axios.get(`http://localhost:5000/api/machinetype/${id}`)
-
+        const res = await axios.get(`http://localhost:5000/api/manufacturer/${id}`)
+        
         dispatch({
-            type: FETCH_MACHINE_TYPE_SUCCESS,
+            type: FETCH_MANUFACTURER_SUCCESS,
             payload: res.data
         })
     } catch (error) {
@@ -67,13 +67,13 @@ export const fetchMachineType = id => async dispatch => {
         }
 
         dispatch({
-            type: FETCH_MACHINE_TYPE_FAIL
+            type: FETCH_MANUFACTURER_FAIL
         })
     }
 }
 
 // action to create a machine type
-export const createMachineType = name => async dispatch => {
+export const createManufacturer = name => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -81,20 +81,20 @@ export const createMachineType = name => async dispatch => {
     }
 
     dispatch({
-        type: CREATE_MACHINE_TYPE_PENDING
+        type: CREATE_MANUFACTURER_PENDING
     })
 
     const json = JSON.stringify({name: name})
 
     try {
-        const res = await axios.post('http://localhost:5000/api/machinetype/create', json, config)
+        const res = await axios.post('http://localhost:5000/api/manufacturer/create', json, config)
 
         dispatch({
-            type: CREATE_MACHINE_TYPE_SUCCESS,
+            type: CREATE_MANUFACTURER_SUCCESS,
             payload: res.data
         })
 
-        dispatch(setAlert('Machine type created!', 'success'))
+        dispatch(setAlert('Manufacturer created!', 'success'))
     } catch (error) {
         const errors = error.response.data.errors
         
@@ -103,13 +103,16 @@ export const createMachineType = name => async dispatch => {
         }
 
         dispatch({
-            type: CREATE_MACHINE_TYPE_FAIL
+            type: CREATE_MANUFACTURER_FAIL
         })
     }
 }
 
 // action to update a machine type
-export const updateMachineType = (formData, id) => async dispatch => {
+export const updateManufacturer = (formData, id) => async dispatch => {
+    const obj = {
+        manufacturer: formData
+    }
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -117,18 +120,18 @@ export const updateMachineType = (formData, id) => async dispatch => {
     }
 
     dispatch({
-        type: UPDATE_MACHINE_TYPE_PENDING
+        type: UPDATE_MANUFACTURER_PENDING
     })
 
     try {
-        const res = await axios.put(`http://localhost:5000/api/machinetype/${id}`, formData, config)
+        const res = await axios.put(`http://localhost:5000/api/manufacturer/update/${id}`, obj, config)
 
         dispatch({
-            type: UPDATE_MACHINE_TYPE_SUCCESS,
+            type: UPDATE_MANUFACTURER_SUCCESS,
             payload: res.data
         })
 
-        dispatch(setAlert('Machine type updated!', 'success'))
+        dispatch(setAlert('Manufacturer updated!', 'success'))
     } catch (error) {
         const errors = error.response.data.errors
         
@@ -137,23 +140,23 @@ export const updateMachineType = (formData, id) => async dispatch => {
         }
 
         dispatch({
-            type: UPDATE_MACHINE_TYPE_FAIL
+            type: UPDATE_MANUFACTURER_FAIL
         })
     }
 }
 
 // action to delete a machine type
-export const deleteMachineType = id => async dispatch => {
+export const deleteManufacturer = id => async dispatch => {
     
     dispatch({
-        type: DELETE_MACHINE_TYPE_PENDING
+        type: DELETE_MANUFACTURER_PENDING
     })
     
     try {
-        const res = await axios.delete(`http://localhost:5000/api/machinetype/${id}`)
+        const res = await axios.delete(`http://localhost:5000/api/manufacturer/delete/${id}`)
 
         dispatch({
-            type: DELETE_MACHINE_TYPE_SUCCESS,
+            type: DELETE_MANUFACTURER_SUCCESS,
             payload: res.data
         })
 
@@ -166,7 +169,7 @@ export const deleteMachineType = id => async dispatch => {
         }
 
         dispatch({
-            type: DELETE_MACHINE_TYPE_FAIL
+            type: DELETE_MANUFACTURER_FAIL
         })
     }
 }

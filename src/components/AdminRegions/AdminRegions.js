@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Table } from '../../elements/components/Table.js'
 import { fetchRegions, deleteRegion } from '../../actions/regions'
+
 const AdminRegions = () => {
     const dispatch = useDispatch()
     const regionState = useSelector(({
@@ -17,6 +18,7 @@ const AdminRegions = () => {
         dispatch(deleteRegion(id))
         window.location.reload()
     }
+    
     return (
         <div>
             <div className="text-center">

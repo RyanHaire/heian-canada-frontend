@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Container,
     Row,
@@ -16,8 +16,19 @@ import Carousel2 from 'react-grid-carousel'
 import Navibar from '../components/Navibar'
 import Footer from '../components/Footer'
 import Product from '../components/Product'
+import { useSelector, useDispatch } from 'react-redux'
+import NewMachineryLogo from '../assets/drilling.png'
+import UsedMachineryLogo from '../assets/laser-cutting-machine.png'
 
 const HomeScreen = () => {
+    const dispatch = useDispatch()
+    
+    useEffect(() => {
+        // get machine types
+        // get brands
+        // get machines - used machines (2 - 4) and featured machines
+    }, [])
+
     return (
         <>
             <header>
@@ -25,13 +36,13 @@ const HomeScreen = () => {
 
                 <Jumbotron className="jumbotron">
                         <h1>CNC Machinery & <br/>Laminating Presses </h1>
-                        <p style={{width: '376px'}}>
-                        Heian Canada proudly offers market leading
+                        <p style={{width: '330px'}}>
+                         Heian Canada proudly offers market leading
                          machinery for materials including wood, plastics, composites,
                          carbon fiber, glass, stone, and nonferrous
                          manufacturing need. Explore our new and used inventory today.
                         </p>
-                        <LinkContainer to="/new-machines" style={{width: '150px'}}>
+                        <LinkContainer to="/new-machinery" style={{width: '150px'}}>
                             <Button className="primary">Shop Now</Button>
                         </LinkContainer>
 
@@ -44,18 +55,13 @@ const HomeScreen = () => {
                         <Col sm={12} md={12} lg={6} className="mb-4">
                             <Card className="pt-3">
                                 <div className="ml-4 mt-4 text-center">
-                                    <Image src="https://via.placeholder.com/100" />
+                                    <Image className="w-25" src={NewMachineryLogo} />
                                 </div>
                                 <div className="m-4">
                                     <h5 className="fw-normal italic text-no-transform">Quick Search</h5>
                                     <h2 className="text-no-transform">New Machinery</h2>
                                     <p className="fw-normal fw-md">
-                                        Lorem ipsum dolor sit amet,
-                                        consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt
-                                        ut labore et dolore magna aliqua.
-                                        Leo vel fringilla est ullamcorper
-                                        eget nulla.
+                                        New machinery to suit your manufacturing needs. The best quality and most reputable machinery. 
                                     </p>
                                     <Form>
                                         <h3 className="text-no-transform">Filter By</h3>
@@ -80,18 +86,13 @@ const HomeScreen = () => {
                         <Col sm={12} md={12} lg={6} className="mb-4">
                             <Card className="pt-3">
                                 <div className="ml-4 mt-4 text-center">
-                                    <Image src="https://via.placeholder.com/100"/>
+                                    <Image className="w-25" src={UsedMachineryLogo}/>
                                 </div>
                                 <div className="m-4">
                                     <h5 className="fw-normal italic text-no-transform">Quick Search</h5>
-                                    <h2 className="text-no-transform">New Machinery</h2>
+                                    <h2 className="text-no-transform">Used Machinery</h2>
                                     <p className="fw-normal">
-                                        Lorem ipsum dolor sit amet,
-                                        consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt
-                                        ut labore et dolore magna aliqua.
-                                        Leo vel fringilla est ullamcorper
-                                        eget nulla.
+                                        Used machinery to suit your manufacturing needs. The best prices for the best machinery.
                                     </p>
                                     <Form>
                                         <h3 className="text-no-transform">Filter By</h3>
@@ -119,9 +120,9 @@ const HomeScreen = () => {
                 <Container style={{marginTop: '10rem'}}>
                     <h2 className="text-no-transform">Featured Machines</h2>
                     <Carousel2 cols={2} showDots loop mobileBreakpoint={[{
-                        breakpoint: 600,
-                        cols: 1,
-                        rows: 1
+                            breakpoint: 800,
+                            cols: 1,
+                            rows: 1
                     }]}>
                         <Carousel2.Item key={1}>
                             <Product 
@@ -172,9 +173,9 @@ const HomeScreen = () => {
                 <Container style={{marginTop: '10rem'}}>
                     <h2 className="text-no-transform">Machines On Sale</h2>
                     <Carousel2 cols={2} showDots loop mobileBreakpoint={[{
-                        breakpoint: 600,
-                        cols: 1,
-                        rows: 1
+                            breakpoint: 800,
+                            cols: 1,
+                            rows: 1
                     }]}>
                         <Carousel2.Item key={1}>
                             <Product 
@@ -230,10 +231,10 @@ const HomeScreen = () => {
                     </Carousel2>
                 </Container>
                 <Container style={{marginTop: '10rem'}}>
-                    <Row class="row-flex-center">
+                    <Row className="row-flex-center">
                         <Col sm={12} md={6} lg={6}>
-                            <Container style={{marginTop: '18rem', marginBottom: '5rem'}}>
-                                <h2 className="fs-xl">get in touch</h2>
+                            <Container style={{marginTop: '1rem', marginBottom: '5rem'}}>
+                                <h2 className="fs-xl">Contact us!</h2>
                                 <h5 className="fw-normal text-no-transform">Whether you’re looking for a price, a specific machine, or just want to ask us something, we’re more than happy to help.</h5>
                             </Container>
                         </Col>
@@ -274,7 +275,7 @@ const HomeScreen = () => {
 
                     </Row>
                 </Container>
-                    <div className="testimonial-slider">
+                    {/* <div className="testimonial-slider">
                         <Carousel style={{width: '100%'}}>
                             <Carousel.Item>
                                <p>First Slide</p>
@@ -286,7 +287,7 @@ const HomeScreen = () => {
                                 <p>Third Slide</p>
                             </Carousel.Item>
                         </Carousel>
-                    </div>
+                    </div> */}
             </main>
 
             <Footer/>

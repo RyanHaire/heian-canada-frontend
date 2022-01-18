@@ -159,6 +159,7 @@ export const fetchMachine = id => async dispatch => {
 
 // action to create a machine
 export const createMachine = formData => async dispatch => {
+    console.log(formData)
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -170,7 +171,7 @@ export const createMachine = formData => async dispatch => {
     })
 
     try {
-        const res = await axios.put('http://localhost:5000/api/machine', formData, config)
+        const res = await axios.post('http://localhost:5000/api/machine', formData, config)
 
         dispatch({
             type: CREATE_MACHINE_SUCCESS,
