@@ -45,7 +45,7 @@ const AdminMachines = () => {
                         : 
                         machinesState.machines.map((item) => 
                             <tr>
-                                <td>{item.images[0]}</td>
+                                <td><img src={item.images[0]} /></td>
                                 <td>{item.name}</td>
                                 <td>{item.price.new}</td>
                                 <td>{item.price.used}</td>
