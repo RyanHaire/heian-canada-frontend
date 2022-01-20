@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Input from '../Input'
-import RichTextEditor from 'react-rte'
+import { Editor} from "react-draft-wysiwyg"; 
+import {EditorState, convertToRaw } from 'draft-js'
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { createMachine } from '../../actions/machine'
 import { fetchMachineTypes } from '../../actions/machinesTypes'
 import { fetchRegions } from '../../actions/regions'
+
+
 
 const InputContainer = styled.div`
     display: flex;
@@ -56,11 +60,12 @@ const AdminCreateMachine = (props) => {
         dispatch(fetchMachineTypes())
     }, [dispatch])
 
+
     const machineTypeState = useSelector((state) => state.machineTypes) || []
     const regionState = useSelector((state) => state.region) || []
 
     const [uploadedImages, setUploadedImages] = useState(0)
-    const [editorState, setEditorState] = useState(RichTextEditor.createEmptyValue())
+    const [editorState, setEditorState] = useState(() => EditorState.createEmpty())
     const [inputList, setInputList] = useState([{name: '', details: ''}])
     const [formData, setFormData] = useState({
         manufacturer: '',
@@ -73,11 +78,17 @@ const AdminCreateMachine = (props) => {
         priceOld: '',
         machineType: '',
         region: '',
+        isUsed: false
     })
 
 
-
-    const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
+    const onChange = e => {
+        let val = e.target.value
+        if(e.target.type == 'checkbox') {
+            val = !isUsed
+        }
+        setFormData({...formData, [e.target.name]: val})
+    } 
     
     const getBase64 = (file, cb) => {
         let reader = new FileReader();
@@ -108,6 +119,7 @@ const AdminCreateMachine = (props) => {
     // handle input change for description list
     const handleInputChange = (e, index) => {
         const { name, value } = e.target;
+        
         const list = [...inputList];
         list[index][name] = value;
         setInputList(list);
@@ -122,12 +134,9 @@ const AdminCreateMachine = (props) => {
     
     // handle click event of the Add button for adding a description
     const handleAddClick = () => {
+        
         setInputList([...inputList, { name: "", details: "" }]);
     };
-
-    const handleTEChange = (value) => {
-        setEditorState(value)
-    }
 
     const { 
         manufacturer,
@@ -140,12 +149,75 @@ const AdminCreateMachine = (props) => {
         priceOld,
         machineType, 
         region,
+        isUsed
     } = formData
 
     const handleCreateMachine = () => {
-        dispatch(createMachine({...formData, images: uploadedImages, descriptions: inputList, additionalDescription: editorState}))
+        console.log(manufacturer)
+        if(manufacturer === '') {
+            alert('manufacturer is empty!')
+            return
+        }
+
+        if(model == '') {
+            alert('model is empty!')
+            return
+        }
+
+        if(year == '') {
+            alert('year is empty!')
+            return
+        }
+
+        if(voltage == '') {
+            alert('voltage is empty!')
+            return
+        }
+
+        if(conditionRating == '') {
+            alert('condition rating is empty!')
+            return
+        }
+
+        if(conditionDescription == '') {
+            alert('condition description is empty!')
+            return
+        }
+
+        if(priceNew == '') {
+            alert('price new is empty!')
+            return
+        }
+
+        if(priceOld == '') {
+            alert('price used is empty!')
+            return
+        }
+
+        if(machineType == '') {
+            alert('machine type is empty!')
+            return
+        }
+
+        if(region == '') {
+            alert('region is empty!')
+            return
+        }
+
+        const contentState = editorState.getCurrentContent()
+        dispatch(
+            createMachine(
+                {
+                    ...formData, 
+                    images: uploadedImages, 
+                    descriptions: inputList, 
+                    additionalDescription: JSON.stringify(convertToRaw(contentState))
+                }
+            )
+        )
+        setEditorState(EditorState.createEmpty())
         console.log(formData)
-        console.log(uploadedImages)
+        // console.log(uploadedImages)
     }
 
     return (
@@ -170,7 +242,11 @@ const AdminCreateMachine = (props) => {
                 <InputContainer>
                     <Label htmlFor="price">Price</Label>
                     <InputField type="number" id="price" name="priceNew" value={priceNew} placeholder="Price New" onChange={e => onChange(e)}/>
-                    <InputField type="number" name="priceOld" value={priceOld} placeholder="Price Old" onChange={e => onChange(e)}/>
+                    <InputField type="number" name="priceOld" value={priceOld} placeholder="Price Used" onChange={e => onChange(e)}/>
+                </InputContainer>
+                <InputContainer>
+                    <Label htmlFor="isused">Is it a used machine?</Label>
+                    <InputField type="checkbox" id="isused" name="isUsed" checked={isUsed} onChange={e => onChange(e)}/>
                 </InputContainer>
                 <InputContainer>
                     <Label htmlFor="machine-type">Machine Type</Label>
@@ -207,7 +283,7 @@ const AdminCreateMachine = (props) => {
                 })}
                 <InputContainer>
                     <Label>Addtional Description</Label>
-                    <RichTextEditor name="additionalDescription" value={editorState} onChange={handleTEChange}/>
+                    <Editor style={{border: '1px solid black'}} editorState={editorState} onEditorStateChange={setEditorState} />
                 </InputContainer>
                 <button onClick={() => handleCreateMachine()}>Create Machine</button> 
             </CreateMachineForm>

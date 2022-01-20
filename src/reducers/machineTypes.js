@@ -19,7 +19,7 @@ import {
 const initialState = {
     isPending: false,
     machineTypes: [],
-    machineType: null
+    machineType: ''
 }
 
 export default function(state = initialState, action) {

@@ -5,7 +5,7 @@ import {
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT
+    LOGOUT,
 } from '../constants'
 import setAuthToken from '../utility/setAuthToken'
 

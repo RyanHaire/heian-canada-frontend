@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     Navbar,
     Nav,
@@ -6,8 +7,11 @@ import {
 } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import './index.css'
+import { loadUser, logout } from '../../actions/auth'
 
 const Navibar = () => {
+   
+
     return (
         <Navbar style={{width: '100%'}} bg="light" expand="lg" collapseOnSelect>
             <LinkContainer to="/">
@@ -34,6 +38,7 @@ const Navibar = () => {
                     <LinkContainer to="/contact" activeClassName="nav-link-active">
                         <Nav.Link className="navbar-link fs-normal text-no-transform">Contact</Nav.Link>
                     </LinkContainer>
+                  
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Table } from '../../elements/components/Table.js'
-import { fetchMachines } from '../../actions/machine'
+import { fetchMachines, deleteMachine } from '../../actions/machine'
 import { useHistory } from 'react-router-dom'
 
 const AdminMachines = () => {
@@ -17,6 +17,11 @@ const AdminMachines = () => {
 
     const createMachinePage = () => {
         history.push('/admin/dashboard/machines/create')    
+    }
+
+    const handleDelete =(id) => {
+        dispatch(deleteMachine(id))
+        window.location.reload()
     }
 
 
@@ -52,7 +57,7 @@ const AdminMachines = () => {
                                 <td>{`${item.condition.rating} - ${item.condition.description}`}</td>
                                 <td>
                                     <button className="btn btn-dark mr-3 w-25">Edit</button>
-                                    <button className="btn btn-danger w-25">Delete</button>
+                                    <button className="btn btn-danger w-25" onClick={() => handleDelete(item._id)}>Delete</button>
                                 </td>
                             </tr>
                         )
