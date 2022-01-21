@@ -10,7 +10,8 @@ import {
 import setAuthToken from '../utility/setAuthToken'
 
 // action to load user into localstorage
-export const loadUser = () => async dispatch => {
+export const loadUser = (url) => async dispatch => {
+   console.log(url)
     if(localStorage.token) {
         setAuthToken(localStorage.token)
 
@@ -19,10 +20,13 @@ export const loadUser = () => async dispatch => {
     
             dispatch({
                 type: USER_LOADED,
-                payload: res.data
+                payload: {
+                    data: res.data,
+                    urlBeforeLogin: url
+                }
             })
         } catch (error) {
-            console.error(error)
+            console.error(JSON.stringify(error))
             dispatch({
                 type: AUTH_ERROR
             })
@@ -54,7 +58,7 @@ export const login = (email, password) => async dispatch => {
 
         dispatch(loadUser())
     } catch (error) {
-        console.log(error.response)
+        console.log(JSON.stringify(error.response))
         const errors = error.response.data.errors
         console.log(`errors = ${errors}`)
         if(errors) {

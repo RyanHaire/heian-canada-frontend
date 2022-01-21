@@ -21,7 +21,11 @@ const AdminMachines = () => {
 
     const handleDelete =(id) => {
         dispatch(deleteMachine(id))
-        window.location.reload()
+        window.location.reload()  
+    }
+
+    const handleEdit = (id) => {
+        history.push(`/admin/dashboard/machines/edit/${id}`)    
     }
 
 
@@ -48,15 +52,15 @@ const AdminMachines = () => {
                         ? 
                             <div>No Machines</div>
                         : 
-                        machinesState.machines.map((item) => 
-                            <tr>
+                        machinesState.machines.map((item, i) => 
+                            <tr key={i}>
                                 <td><img src={item.images[0]} /></td>
                                 <td>{item.name}</td>
                                 <td>{item.price.new}</td>
                                 <td>{item.price.used}</td>
                                 <td>{`${item.condition.rating} - ${item.condition.description}`}</td>
                                 <td>
-                                    <button className="btn btn-dark mr-3 w-25">Edit</button>
+                                    <button className="btn btn-dark mr-3 w-25" onClick={() => handleEdit(item._id)}>Edit</button>
                                     <button className="btn btn-danger w-25" onClick={() => handleDelete(item._id)}>Delete</button>
                                 </td>
                             </tr>

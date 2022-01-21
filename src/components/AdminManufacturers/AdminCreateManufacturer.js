@@ -27,7 +27,6 @@ const AdminCreateManufacturer = () => {
         dispatch(createManufacturer(manufacturer.trim()))
         setManufacturer("")
         history.push('/admin/dashboard/manufacturers')
-        window.location.reload()
     }
     
     return (

@@ -9,7 +9,7 @@ import { loadUser } from '../actions/auth'
 const AdminDashboardCreateManufacturer = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(loadUser())
+        dispatch(loadUser(window.location.pathname))
     }, [])
 
     const userState = useSelector((state) => state.auth) || []

@@ -26,7 +26,6 @@ const AdminCreateMachineType = () => {
         dispatch(createMachineType(machineType.trim()))
         setMachineType("")
         history.push('/admin/dashboard/machinetypes')
-        window.location.reload()
     }
 
     return (

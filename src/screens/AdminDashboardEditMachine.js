@@ -1,12 +1,12 @@
 import React, { useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import AdminCreateMachineType from '../components/AdminMachineTypes/AdminCreateMachineType'
+import AdminEditMachine from '../components/AdminMachines/AdminEditMachine'
 import Navibar from '../components/Navibar'
 import AdminNavibar from '../components/AdminNavibar'
 import Alert from '../components/Alert'
 import { Redirect } from 'react-router-dom'
 import { loadUser } from '../actions/auth'
-const AdminDashboardCreateMachineType = () => {
+const AdminDashboardEditMachineType = (props) => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(loadUser(window.location.pathname))
@@ -26,12 +26,12 @@ const AdminDashboardCreateMachineType = () => {
            <main>
                <Alert/>
                <AdminNavibar/>
-               <AdminCreateMachineType/>
+               <AdminEditMachine {...props}/>
            </main>
         </>
-        : <Redirect to="/admin/login"/>}
+        : <Redirect to={"/admin/login"}/>}
         </>
     )
 }
 
-export default AdminDashboardCreateMachineType
+export default AdminDashboardEditMachineType

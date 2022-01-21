@@ -27,7 +27,6 @@ const AdminCreateRegion = () => {
         dispatch(createRegion(region.trim()))
         setRegion("")
         history.push('/admin/dashboard/regions')
-        window.location.reload()
     }
     return (
         <CreateRegionForm>

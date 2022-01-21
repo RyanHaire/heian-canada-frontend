@@ -11,7 +11,7 @@ const AdminDashboardMachines = () => {
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(loadUser())
+        dispatch(loadUser(window.location.pathname))
     }, [])
 
     const userState = useSelector((state) => state.auth) || []

@@ -10,7 +10,8 @@ const AdminDashboardMachineTypes = () => {
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(loadUser())
+        dispatch(loadUser(window.location.pathname))
+        // attach current url to dispatch
     }, [])
 
     const userState = useSelector((state) => state.auth) || []

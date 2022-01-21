@@ -19,6 +19,7 @@ import LoginScreen from './screens/LoginScreen'
 import AdminDashboardScreen from './screens/AdminDashboardScreen'
 import AdminDashboardMachines from './screens/AdminDashboardMachines'
 import AdminDashboardCreateMachine from './screens/AdminDashboardCreateMachine'
+import AdminDashboardEditMachine from './screens/AdminDashboardEditMachine'
 import AdminDashboardCreateMachineType from './screens/AdminDashboardCreateMachineType'
 import AdminDashboardEditMachineType from './screens/AdminDashboardEditMachineType'
 import AdminDashboardMachineTypes from './screens/AdminDashboardMachineTypes'
@@ -38,11 +39,11 @@ if(localStorage.token) {
 }
 
 const App = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(loadUser())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(loadUser(window.location.pathname))
+  // }, [dispatch])
 
   return (
       <Router>
@@ -52,6 +53,7 @@ const App = () => {
             <Route exact path="/admin/dashboard" component={AdminDashboardScreen}/>
             <Route exact path="/admin/dashboard/machines" component={AdminDashboardMachines}/>
             <Route exact path="/admin/dashboard/machines/create" component={AdminDashboardCreateMachine}/>
+            <Route exact path="/admin/dashboard/machines/edit/:id" component={ props => (<AdminDashboardEditMachine {...props}/>)}/>
             <Route exact path="/admin/dashboard/machinetypes" component={AdminDashboardMachineTypes}/>
             <Route exact path="/admin/dashboard/machinetypes/create" component={AdminDashboardCreateMachineType}/>
             <Route exact path="/admin/dashboard/machinetypes/edit/:id" component={ props => (<AdminDashboardEditMachineType {...props}/>)}/>

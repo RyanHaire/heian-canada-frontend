@@ -8,6 +8,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { createMachine } from '../../actions/machine'
 import { fetchMachineTypes } from '../../actions/machinesTypes'
 import { fetchRegions } from '../../actions/regions'
+import { fetchManufacturers } from '../../actions/manufacturers'
 
 
 
@@ -58,9 +59,12 @@ const AdminCreateMachine = (props) => {
         
         // fetch machine types
         dispatch(fetchMachineTypes())
+
+        // fetch machine manufacturers
+        dispatch(fetchManufacturers())
     }, [dispatch])
 
-
+    const manufacturerState = useSelector((state) => state.manufacturers) || []
     const machineTypeState = useSelector((state) => state.machineTypes) || []
     const regionState = useSelector((state) => state.region) || []
 
@@ -230,7 +234,18 @@ const AdminCreateMachine = (props) => {
                     </div>
                     <input type="file" id="images" name="images" multiple accept="image/png, image/jpeg" onChange={handleUploadedImages}/>
                 </InputContainer>
-                <Input type="text" label="Manufacturer" name="manufacturer" value={manufacturer} handleChange={e => onChange(e)}/>
+                <InputContainer>
+                    <Label htmlFor="machine-manufacturer">Manufacturer</Label>
+                    <SelectField id="machine-manufacturer" name="manufacturer" value={manufacturer} onChange={e => onChange(e)}>
+                        <option value=""></option>
+                        {manufacturerState.manufacturers !== [] ?  
+                            manufacturerState.manufacturers.map((manufacturer, i) => {
+                                return (<option key={i} value={manufacturer.name}>{manufacturer.name}</option>)
+                        }) : 
+                            <option value="No Manufacturers Types Available">No Manufacturers Types Available</option>
+                        }
+                    </SelectField>
+                </InputContainer>
                 <Input type="text" label="Model" name="model" value={model} handleChange={e => onChange(e)}/>
                 <Input type="text" label="Year" name="year" value={year} handleChange={e => onChange(e)}/>
                 <Input type="text" label="Voltage" name="voltage" value={voltage} handleChange={e => onChange(e)}/>
@@ -251,7 +266,8 @@ const AdminCreateMachine = (props) => {
                 <InputContainer>
                     <Label htmlFor="machine-type">Machine Type</Label>
                     <SelectField id="machine-type" name="machineType" value={machineType} onChange={e => onChange(e)}>
-                        {machineTypeState.machines === [] ?  
+                        <option value=""></option>
+                        {machineTypeState.machines !== [] ?  
                             machineTypeState.machineTypes.map((machineType, i) => {
                                 return (<option key={i} value={machineType.name}>{machineType.name}</option>)
                         }) : 
