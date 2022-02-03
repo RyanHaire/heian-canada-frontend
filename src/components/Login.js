@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { login } from '../actions/auth'
@@ -40,7 +40,7 @@ const Login = () => {
             <button className="btn btn-primary w-100" onClick={() => handleLogin()}>Login</button>
         </LoginForm> 
         : 
-        <Redirect to={userState.urlBeforeLogin || "/admin/dashboard"}/>
+        <Navigate to={userState.urlBeforeLogin || "/admin/dashboard"}/>
         }
     </>
        

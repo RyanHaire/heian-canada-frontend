@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import Navibar from '../components/Navibar'
 import AdminNavibar from '../components/AdminNavibar'
 import AdminDashboard from '../components/AdminDashboard'
@@ -32,7 +32,7 @@ const AdminDashboardScreen = () => {
                <AdminDashboard/>
            </main>
         </>
-        : <Redirect to="/admin/login"/>}
+        : <Navigate to="/admin/login"/>}
         </>
         
        

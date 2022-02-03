@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Input from '../Input'
 import { createRegion } from '../../actions/regions'
@@ -15,7 +15,7 @@ const CreateRegionForm = styled.div`
 `
 
 const AdminCreateRegion = () => {
-    const history = useHistory()
+    const navigate= useNavigate()
     const dispatch = useDispatch()
     const [region, setRegion] = useState("")
 
@@ -26,7 +26,7 @@ const AdminCreateRegion = () => {
     const handleCreateRegion = () => {
         dispatch(createRegion(region.trim()))
         setRegion("")
-        history.push('/admin/dashboard/regions')
+        navigate.push('/admin/dashboard/regions')
     }
     return (
         <CreateRegionForm>

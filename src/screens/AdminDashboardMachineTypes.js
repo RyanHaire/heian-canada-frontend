@@ -4,7 +4,7 @@ import AdminMachineTypes from '../components/AdminMachineTypes/AdminMachineTypes
 import Navibar from '../components/Navibar'
 import AdminNavibar from '../components/AdminNavibar'
 import Alert from '../components/Alert'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { loadUser } from '../actions/auth'
 const AdminDashboardMachineTypes = () => {
 
@@ -31,7 +31,7 @@ const AdminDashboardMachineTypes = () => {
                <AdminMachineTypes/>
            </main>
         </>
-        : <Redirect to="/admin/login"/>}
+        : <Navigate to="/admin/login"/>}
         </>
        
     )

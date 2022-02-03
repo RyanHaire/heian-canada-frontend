@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Table } from '../../elements/components/Table.js'
 import { fetchMachines, deleteMachine } from '../../actions/machine'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const AdminMachines = () => {
     const dispatch = useDispatch()
-    const history = useHistory()
+    const navigate= useNavigate()
 
     useEffect(() => {
         dispatch(fetchMachines())
@@ -16,7 +16,7 @@ const AdminMachines = () => {
     const machinesState = useSelector((state) => state.machine) || []
 
     const createMachinePage = () => {
-        history.push('/admin/dashboard/machines/create')    
+        navigate.push('/admin/dashboard/machines/create')    
     }
 
     const handleDelete =(id) => {
@@ -25,7 +25,7 @@ const AdminMachines = () => {
     }
 
     const handleEdit = (id) => {
-        history.push(`/admin/dashboard/machines/edit/${id}`)    
+        navigate.push(`/admin/dashboard/machines/edit/${id}`)    
     }
 
 

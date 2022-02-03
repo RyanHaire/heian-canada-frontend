@@ -5,7 +5,6 @@ import {
     Col,
     Image,
     Button,
-    Jumbotron,
     Card,
     Form,
     FormGroup,
@@ -34,7 +33,7 @@ const HomeScreen = () => {
             <header>
                 <Navibar/>
 
-                <Jumbotron className="jumbotron">
+                <div className="jumbotron container-fluid bg-light text-dark p-5">
                         <h1>CNC Machinery & <br/>Laminating Presses </h1>
                         <p style={{width: '330px'}}>
                          Heian Canada proudly offers market leading
@@ -46,7 +45,7 @@ const HomeScreen = () => {
                             <Button className="primary">Shop Now</Button>
                         </LinkContainer>
 
-                </Jumbotron>
+                </div>
             </header>
 
             <main>

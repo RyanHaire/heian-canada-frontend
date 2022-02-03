@@ -4,7 +4,7 @@ import AdminEditRegion from '../components/AdminRegions/AdminEditRegion'
 import Navibar from '../components/Navibar'
 import AdminNavibar from '../components/AdminNavibar'
 import Alert from '../components/Alert'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { loadUser } from '../actions/auth'
 const AdminDashboardEditRegion = (props) => {
 
@@ -30,7 +30,7 @@ const AdminDashboardEditRegion = (props) => {
                <AdminEditRegion {...props}/>
            </main>
         </>
-        : <Redirect to="/admin/login"/>}
+        : <Navigate to="/admin/login"/>}
         </>
     )
 }

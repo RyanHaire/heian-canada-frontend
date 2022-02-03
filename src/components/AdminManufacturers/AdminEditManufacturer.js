@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Input from '../Input'
 import { fetchManufacturer, updateManufacturer } from '../../actions/manufacturers'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const EditManufacturerForm = styled.div`
     margin-top: 50px;
@@ -14,7 +14,7 @@ const EditManufacturerForm = styled.div`
 `
 
 const AdminEditManufacturer = (props) => {
-    const history = useHistory()
+    const navigate= useNavigate()
     const dispatch = useDispatch()
     const manufacturerState = useSelector((state) => state.manufacturers)
     const [manufacturer, setManufacturer] = useState('')
@@ -35,7 +35,7 @@ const AdminEditManufacturer = (props) => {
 
     const handleUpdateManufacturer = () => {
         dispatch(updateManufacturer(manufacturer.trim(), props.match.params.id))
-        history.push('/admin/dashboard/manufacturers')
+        navigate.push('/admin/dashboard/manufacturers')
         setManufacturer("")
     }
     return (

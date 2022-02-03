@@ -1,5 +1,4 @@
 import React, { useState, useEffect} from 'react'
-import { Jumbotron } from 'react-bootstrap'
 import Footer from '../components/Footer'
 import Navibar from '../components/Navibar'
 import CategoryNav from '../components/CategoryNav'
@@ -30,12 +29,12 @@ const UsedMachineryScreen = () => {
         <>
             <header>
                 <Navibar/>
-                <Jumbotron className={`jumbotron ${hiddenStyle}`}>
+                <div className={`jumbotron ${hiddenStyle} container-fluid bg-light text-dark p-5`}>
                     <h1 className={`${displayNone}`}>Used Machinery</h1>
                     <p style={{width: '26rem'}} className={`fs-md ${displayNone}`}>
                         Looking for a lower cost? Explore our collection of used machinery.
                     </p>
-                </Jumbotron>
+                </div>
             </header>
             <main className="d-flex">
                 <CategoryNav />

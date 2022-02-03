@@ -4,7 +4,7 @@ import AdminEditMachineType from '../components/AdminMachineTypes/AdminEditMachi
 import Navibar from '../components/Navibar'
 import AdminNavibar from '../components/AdminNavibar'
 import Alert from '../components/Alert'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { loadUser } from '../actions/auth'
 const AdminDashboardEditMachineType = (props) => {
     const dispatch = useDispatch()
@@ -29,7 +29,7 @@ const AdminDashboardEditMachineType = (props) => {
                <AdminEditMachineType {...props}/>
            </main>
         </>
-        : <Redirect to="/admin/login"/>}
+        : <Navigate to="/admin/login"/>}
         </>
     )
 }

@@ -5,7 +5,7 @@ import AdminCreateRegion from '../components/AdminRegions/AdminCreateRegion'
 import Navibar from '../components/Navibar'
 import AdminNavibar from '../components/AdminNavibar'
 import Alert from '../components/Alert'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { loadUser } from '../actions/auth'
 const AdminDashboardCreateRegion = () => {
     const dispatch = useDispatch()
@@ -30,7 +30,7 @@ const AdminDashboardCreateRegion = () => {
                <AdminCreateRegion/>
            </main>
         </>
-        : <Redirect to="/admin/login"/>}
+        : <Navigate to="/admin/login"/>}
         </>
     )
 }

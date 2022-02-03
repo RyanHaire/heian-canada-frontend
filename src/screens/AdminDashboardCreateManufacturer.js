@@ -4,7 +4,7 @@ import AdminCreateManufacturer from '../components/AdminManufacturers/AdminCreat
 import Navibar from '../components/Navibar'
 import AdminNavibar from '../components/AdminNavibar'
 import Alert from '../components/Alert'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { loadUser } from '../actions/auth'
 const AdminDashboardCreateManufacturer = () => {
     const dispatch = useDispatch()
@@ -29,7 +29,7 @@ const AdminDashboardCreateManufacturer = () => {
                <AdminCreateManufacturer/>
            </main>
         </>
-        : <Redirect to="/admin/login"/>}
+        : <Navigate to="/admin/login"/>}
         </>
     )
 }

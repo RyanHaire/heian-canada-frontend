@@ -5,7 +5,7 @@ import AdminMachines from '../components/AdminMachines/AdminMachines'
 import Navibar from '../components/Navibar'
 import AdminNavibar from '../components/AdminNavibar'
 import Alert from '../components/Alert'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { loadUser } from '../actions/auth'
 const AdminDashboardMachines = () => {
 
@@ -31,7 +31,7 @@ const AdminDashboardMachines = () => {
                <AdminMachines/>
            </main>
         </>
-        : <Redirect to="/admin/login"/>}
+        : <Navigate to={"/admin/login"}/>}
         </>
     )
 }

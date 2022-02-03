@@ -4,7 +4,7 @@ import AdminCreateMachineType from '../components/AdminMachineTypes/AdminCreateM
 import Navibar from '../components/Navibar'
 import AdminNavibar from '../components/AdminNavibar'
 import Alert from '../components/Alert'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { loadUser } from '../actions/auth'
 const AdminDashboardCreateMachineType = () => {
     const dispatch = useDispatch()
@@ -29,7 +29,7 @@ const AdminDashboardCreateMachineType = () => {
                <AdminCreateMachineType/>
            </main>
         </>
-        : <Redirect to="/admin/login"/>}
+        : <Navigate to="/admin/login"/>}
         </>
     )
 }

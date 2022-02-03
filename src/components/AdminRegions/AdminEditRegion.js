@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Input from '../Input'
 import { fetchRegion, updateRegion } from '../../actions/regions'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const EditRegionForm = styled.div`
     margin-top: 50px;
@@ -14,7 +14,7 @@ const EditRegionForm = styled.div`
 `
 
 const AdminEditRegion = (props) => {
-    const history = useHistory()
+    const navigate= useNavigate()
     const dispatch = useDispatch()
     const [region, setRegion] = useState("")
 
@@ -30,7 +30,7 @@ const AdminEditRegion = (props) => {
 
     const handleUpdateRegion = () => {
         dispatch(updateRegion(region.trim(), props.match.params.id))
-        history.push('/admin/dashboard/region')
+        navigate.push('/admin/dashboard/region')
         setRegion("")
     }
     return (

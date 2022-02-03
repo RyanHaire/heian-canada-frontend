@@ -23,7 +23,7 @@ const Navibar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto mr-3">
-                    <LinkContainer to="/" exact activeClassName="nav-link-active">
+                    <LinkContainer to="/"  activeClassName="nav-link-active">
                         <Nav.Link className="navbar-link fs-normal text-no-transform" active="nav-link-active">Home</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to="/new-machinery" activeClassName="nav-link-active">

@@ -1,6 +1,6 @@
 import React, { useState }from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Input from '../Input'
 import { createMachineType } from '../../actions/machinesTypes'
@@ -14,7 +14,7 @@ const CreateMachineTypeForm = styled.div`
 `
 
 const AdminCreateMachineType = () => {
-    const history = useHistory()
+    const navigate= useNavigate()
     const dispatch = useDispatch()
     const [machineType, setMachineType] = useState("")
 
@@ -25,7 +25,7 @@ const AdminCreateMachineType = () => {
     const handleCreateMachineType = () => {
         dispatch(createMachineType(machineType.trim()))
         setMachineType("")
-        history.push('/admin/dashboard/machinetypes')
+        navigate.push('/admin/dashboard/machinetypes')
     }
 
     return (

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Input from '../Input'
 import { fetchMachineType, updateMachineType } from '../../actions/machinesTypes'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const EditMachineTypeForm = styled.div`
     margin-top: 50px;
@@ -14,7 +14,7 @@ const EditMachineTypeForm = styled.div`
 `
 
 const AdminEditMachineType = (props) => {
-    const history = useHistory()
+    const navigate= useNavigate()
     const dispatch = useDispatch()
     const [machineType, setMachineType] = useState("")
 
@@ -34,7 +34,7 @@ const AdminEditMachineType = (props) => {
 
     const handleUpdateMachineType = () => {
         dispatch(updateMachineType(machineType.trim(), props.match.params.id))
-        history.push('/admin/dashboard/machinetype')
+        navigate.push('/admin/dashboard/machinetype')
         setMachineType("")
     }
     return (
