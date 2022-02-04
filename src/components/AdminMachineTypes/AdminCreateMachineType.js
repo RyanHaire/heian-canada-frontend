@@ -25,7 +25,7 @@ const AdminCreateMachineType = () => {
     const handleCreateMachineType = () => {
         dispatch(createMachineType(machineType.trim()))
         setMachineType("")
-        navigate.push('/admin/dashboard/machinetypes')
+        navigate('/admin/dashboard/machinetypes')
     }
 
     return (

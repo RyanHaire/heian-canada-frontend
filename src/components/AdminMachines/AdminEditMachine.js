@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import Input from '../Input'
 import { Editor} from "react-draft-wysiwyg"; 
@@ -50,6 +51,7 @@ const SelectField = styled.select`
 `
 
 const AdminEditMachine = (props) => {
+    let { id } = useParams()
     const dispatch = useDispatch()
     const machineState = useSelector((state) => state.machine) || []
     const machineTypeState = useSelector((state) => state.machineTypes) || []
@@ -76,7 +78,7 @@ const AdminEditMachine = (props) => {
 
     useEffect(() => {
         try {
-            dispatch(fetchMachine(props.match.params.id))
+            dispatch(fetchMachine(id))
 
             dispatch(fetchRegions())
     
@@ -93,10 +95,14 @@ const AdminEditMachine = (props) => {
                 conditionDescription: machineState.machine.condition.description,
                 priceNew: machineState.machine.price.new,
                 priceOld: machineState.machine.price.used,
-                machineType: '',
-                region: '',
+                machineType: machineTypeState.machineTypes.find(x => x._id === machineState.machine.type).name,
+                region: regionState.regions.find(x => x._id === machineState.machine.region).name,
                 isUsed: machineState.machine.isUsed
             })
+
+            console.log(machineTypeState.machineTypes.find(x => x._id === machineState.machine.type).name)
+            console.log("machineType = " + machineType)
+
         } catch(error) {
             console.log(error)
         }
@@ -236,7 +242,7 @@ const AdminEditMachine = (props) => {
                     descriptions: inputList, 
                     additionalDescription: JSON.stringify(convertToRaw(contentState))
                 },
-                props.match.params.id)
+                id)
         )
         setEditorState(EditorState.createEmpty())
         console.log(formData)
@@ -248,82 +254,82 @@ const AdminEditMachine = (props) => {
         {machineState.isPending === true || machineState.machine === null ? "Loading..." : 
         <CreateMachineForm>
             {console.log(machineState)}
-        <InputContainer>
-            <Label htmlFor="images">Images</Label>
-            <div className="mb-10">
-                {uploadedImages && uploadedImages.map((x) => <img src={x} className="w-25"/>)}
-            </div>
-            <input type="file" id="images" name="images" multiple accept="image/png, image/jpeg" onChange={handleUploadedImages}/>
-        </InputContainer>
-        <InputContainer>
-            <Label htmlFor="machine-manufacturer">Manufacturer</Label>
-            <SelectField id="machine-manufacturer" name="manufacturer" value={manufacturer} onChange={e => onChange(e)}>
-                <option value={manufacturer}>{manufacturer}</option>
-                {manufacturerState.manufacturers !== [] ?  
-                    manufacturerState.manufacturers.map((manufacturer, i) => {
-                        return (<option key={i} value={manufacturer.name}>{manufacturer.name}</option>)
-                }) : 
-                    <option value="No Manufacturers Types Available">No Manufacturers Types Available</option>
-                }
-            </SelectField>
-        </InputContainer>
-        <Input type="text" label="Model" name="model" value={model} handleChange={e => onChange(e)}/>
-        <Input type="text" label="Year" name="year" value={year} handleChange={e => onChange(e)}/>
-        <Input type="text" label="Voltage" name="voltage" value={voltage} handleChange={e => onChange(e)}/>
-        <InputContainer>
-            <Label htmlFor="condition">Condition</Label>
-            <InputField type="number" id="condition" name="conditionRating" value={conditionRating} placeholder="Rating out of 5" onChange={e => onChange(e)}/>
-            <InputField type="text" name="conditionDescription" value={conditionDescription} placeholder="Description (Bad - Very Good)" onChange={e => onChange(e)}/> 
-        </InputContainer>
-        <InputContainer>
-            <Label htmlFor="price">Price</Label>
-            <InputField type="number" id="price" name="priceNew" value={priceNew} placeholder="Price New" onChange={e => onChange(e)}/>
-            <InputField type="number" name="priceOld" value={priceOld} placeholder="Price Used" onChange={e => onChange(e)}/>
-        </InputContainer>
-        <InputContainer>
-            <Label htmlFor="isused">Is it a used machine?</Label>
-            <InputField type="checkbox" id="isused" name="isUsed" checked={isUsed} onChange={e => onChange(e)}/>
-        </InputContainer>
-        <InputContainer>
-            <Label htmlFor="machine-type">Machine Type</Label>
-            <SelectField id="machine-type" name="machineType" value={machineType} onChange={e => onChange(e)}>
-                <option value=""></option>
-                {machineTypeState.machines !== [] ?  
-                    machineTypeState.machineTypes.map((machineType, i) => {
-                        return (<option key={i} value={machineType.name}>{machineType.name}</option>)
-                }) : 
-                    <option value="No Machine Types Available">No Machine Types Available</option>
-                }
-            </SelectField>
-        </InputContainer>
-        <InputContainer>
-            <Label htmlFor="region">Region</Label>
-            <SelectField id="region" name="region" value={region} onChange={e => onChange(e)}>
-                <option value=""></option>
-                {regionState.regions !== [] ? regionState.regions.map((region, i) => {
-                    return (<option key={i} value={region.name}>{region.name}</option>)
-                }) : <option value="No Regions Available">No Regions Available</option>}
-            </SelectField> 
-        </InputContainer>
-        {inputList.map((x, i) => {
-            return (<InputContainer key={i}>
-                <Label htmlFor={`description-${i}`}>
-                    Description {`${i + 1}`} &nbsp;
-                    <span className="btn-box">
-                        {inputList.length !== 1 && <button className="btn btn-primary w-25 mr-10" onClick={() => handleRemoveClick(i)}>Remove</button>}
-                        {inputList.length - 1 === i && <button className="btn btn-primary w-25" onClick={handleAddClick}>Add</button>}
-                    </span>
-                </Label>
-                <InputField type="text" name="name" placeholder="Name" value={x.name} onChange={e => handleInputChange(e, i)}/>
-                <InputField type="text" name="details" placeholder="Details" value={x.details} onChange={e => handleInputChange(e, i)}/>
-            </InputContainer>)
-        })}
-        <InputContainer>
-            <Label>Addtional Description</Label>
-            <Editor style={{border: '1px solid black'}} editorState={editorState} onEditorStateChange={setEditorState} />
-        </InputContainer>
-        <button onClick={() => handleUpdateMachine()}>Update Machine</button> 
-    </CreateMachineForm>
+            <InputContainer>
+                <Label htmlFor="images">Images</Label>
+                <div className="mb-10">
+                    {uploadedImages && uploadedImages.map((x) => <img src={x} className="w-25"/>)}
+                </div>
+                <input type="file" id="images" name="images" multiple accept="image/png, image/jpeg" onChange={handleUploadedImages}/>
+            </InputContainer>
+            <InputContainer>
+                <Label htmlFor="machine-manufacturer">Manufacturer</Label>
+                <SelectField id="machine-manufacturer" name="manufacturer" value={manufacturer} onChange={e => onChange(e)}>
+                    <option value=""></option>
+                    {manufacturerState.manufacturers !== [] ?  
+                        manufacturerState.manufacturers.map((manufacturer, i) => {
+                            return (<option key={i} selected={manufacturer._id === machineState.machine.manufacturer} value={manufacturer.name}>{manufacturer.name}</option>)
+                    }) : 
+                        <option value="No Manufacturers Types Available">No Manufacturers Types Available</option>
+                    }
+                </SelectField>
+            </InputContainer>
+            <Input type="text" label="Model" name="model" value={model} handleChange={e => onChange(e)}/>
+            <Input type="text" label="Year" name="year" value={year} handleChange={e => onChange(e)}/>
+            <Input type="text" label="Voltage" name="voltage" value={voltage} handleChange={e => onChange(e)}/>
+            <InputContainer>
+                <Label htmlFor="condition">Condition</Label>
+                <InputField type="number" id="condition" name="conditionRating" value={conditionRating} placeholder="Rating out of 5" onChange={e => onChange(e)}/>
+                <InputField type="text" name="conditionDescription" value={conditionDescription} placeholder="Description (Bad - Very Good)" onChange={e => onChange(e)}/> 
+            </InputContainer>
+            <InputContainer>
+                <Label htmlFor="price">Price</Label>
+                <InputField type="number" id="price" name="priceNew" value={priceNew} placeholder="Price New" onChange={e => onChange(e)}/>
+                <InputField type="number" name="priceOld" value={priceOld} placeholder="Price Used" onChange={e => onChange(e)}/>
+            </InputContainer>
+            <InputContainer>
+                <Label htmlFor="isused">Is it a used machine?</Label>
+                <InputField type="checkbox" id="isused" name="isUsed" checked={isUsed} onChange={e => onChange(e)}/>
+            </InputContainer>
+            <InputContainer>
+                <Label htmlFor="machine-type">Machine Type</Label>
+                <SelectField id="machine-type" name="machineType" value={machineType} onChange={e => onChange(e)}>
+                    <option value=""></option>
+                    {machineTypeState.machineTypes !== [] ?  
+                        machineTypeState.machineTypes.map((machineType, i) => {
+                            return (<option key={i}  value={machineType.name}>{machineType.name}</option>)
+                    }) : 
+                        <option value="No Machine Types Available">No Machine Types Available</option>
+                    }
+                </SelectField>
+            </InputContainer>
+            <InputContainer>
+                <Label htmlFor="region">Region</Label>
+                <SelectField id="region" name="region" value={region} onChange={e => onChange(e)}>
+                    <option value=""></option>
+                    {regionState.regions !== [] ? regionState.regions.map((region, i) => {
+                        return (<option key={i} value={region.name}>{region.name}</option>)
+                    }) : <option value="No Regions Available">No Regions Available</option>}
+                </SelectField> 
+            </InputContainer>
+            {inputList.map((x, i) => {
+                return (<InputContainer key={i}>
+                    <Label htmlFor={`description-${i}`}>
+                        Description {`${i + 1}`} &nbsp;
+                        <span className="btn-box">
+                            {inputList.length !== 1 && <button className="btn btn-primary w-25 mr-10" onClick={() => handleRemoveClick(i)}>Remove</button>}
+                            {inputList.length - 1 === i && <button className="btn btn-primary w-25" onClick={handleAddClick}>Add</button>}
+                        </span>
+                    </Label>
+                    <InputField type="text" name="name" placeholder="Name" value={x.name} onChange={e => handleInputChange(e, i)}/>
+                    <InputField type="text" name="details" placeholder="Details" value={x.details} onChange={e => handleInputChange(e, i)}/>
+                </InputContainer>)
+            })}
+            <InputContainer>
+                <Label>Addtional Description</Label>
+                <Editor style={{border: '1px solid black'}} editorState={editorState} onEditorStateChange={setEditorState} />
+            </InputContainer>
+            <button onClick={() => handleUpdateMachine()}>Update Machine</button> 
+        </CreateMachineForm>
         }
             
         </>

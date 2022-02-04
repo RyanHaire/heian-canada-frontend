@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 const AdminMachines = () => {
     const dispatch = useDispatch()
-    const navigate= useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(fetchMachines())
@@ -16,7 +16,7 @@ const AdminMachines = () => {
     const machinesState = useSelector((state) => state.machine) || []
 
     const createMachinePage = () => {
-        navigate.push('/admin/dashboard/machines/create')    
+        navigate('/admin/dashboard/machines/create')    
     }
 
     const handleDelete =(id) => {
@@ -25,7 +25,7 @@ const AdminMachines = () => {
     }
 
     const handleEdit = (id) => {
-        navigate.push(`/admin/dashboard/machines/edit/${id}`)    
+        navigate(`/admin/dashboard/machines/edit/${id}`)    
     }
 
 

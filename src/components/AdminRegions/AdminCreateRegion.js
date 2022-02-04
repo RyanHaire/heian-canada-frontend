@@ -26,7 +26,7 @@ const AdminCreateRegion = () => {
     const handleCreateRegion = () => {
         dispatch(createRegion(region.trim()))
         setRegion("")
-        navigate.push('/admin/dashboard/regions')
+        navigate('/admin/dashboard/regions')
     }
     return (
         <CreateRegionForm>

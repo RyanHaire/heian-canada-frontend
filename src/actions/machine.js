@@ -139,7 +139,7 @@ export const fetchMachine = id => async dispatch => {
         })
 
         const res = await axios.get(`http://localhost:5000/api/machine/${id}`)
-        console.log("res.data is " + JSON.stringify(res.data))
+        //console.log("res.data is " + JSON.stringify(res.data))
         dispatch({
             type: FETCH_MACHINE_SUCCESS,
             payload: res.data

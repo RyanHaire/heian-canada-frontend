@@ -26,7 +26,7 @@ const AdminCreateManufacturer = () => {
     const handleCreateManufacturer = () => {
         dispatch(createManufacturer(manufacturer.trim()))
         setManufacturer("")
-        navigate.push('/admin/dashboard/manufacturers')
+        navigate('/admin/dashboard/manufacturers')
     }
     
     return (

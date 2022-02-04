@@ -53,7 +53,7 @@ const App = () => {
             <Route exact path="/admin/dashboard" element={<AdminDashboardScreen/>}/>
             <Route exact path="/admin/dashboard/machines" element={<AdminDashboardMachines/>}/>
             <Route exact path="/admin/dashboard/machines/create" element={<AdminDashboardCreateMachine/>}/>
-            <Route exact path="/admin/dashboard/machines/edit/:id" element={ props => (<AdminDashboardEditMachine {...props}/>)}/>
+            <Route exact path="/admin/dashboard/machines/edit/:id" element={<AdminDashboardEditMachine/>}/>
             <Route exact path="/admin/dashboard/machinetypes" element={<AdminDashboardMachineTypes/>}/>
             <Route exact path="/admin/dashboard/machinetypes/create" element={<AdminDashboardCreateMachineType/>}/>
             <Route exact path="/admin/dashboard/machinetypes/edit/:id" element={ props => (<AdminDashboardEditMachineType {...props}/>)}/>

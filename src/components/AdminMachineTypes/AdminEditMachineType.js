@@ -34,7 +34,7 @@ const AdminEditMachineType = (props) => {
 
     const handleUpdateMachineType = () => {
         dispatch(updateMachineType(machineType.trim(), props.match.params.id))
-        navigate.push('/admin/dashboard/machinetype')
+        navigate('/admin/dashboard/machinetype')
         setMachineType("")
     }
     return (

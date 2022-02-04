@@ -35,7 +35,7 @@ const AdminEditManufacturer = (props) => {
 
     const handleUpdateManufacturer = () => {
         dispatch(updateManufacturer(manufacturer.trim(), props.match.params.id))
-        navigate.push('/admin/dashboard/manufacturers')
+        navigate('/admin/dashboard/manufacturers')
         setManufacturer("")
     }
     return (

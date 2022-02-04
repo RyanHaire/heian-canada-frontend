@@ -30,7 +30,7 @@ const AdminEditRegion = (props) => {
 
     const handleUpdateRegion = () => {
         dispatch(updateRegion(region.trim(), props.match.params.id))
-        navigate.push('/admin/dashboard/region')
+        navigate('/admin/dashboard/region')
         setRegion("")
     }
     return (
