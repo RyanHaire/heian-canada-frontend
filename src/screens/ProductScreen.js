@@ -1,17 +1,65 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import {EditorState, Editor, convertFromRaw} from 'draft-js'
+import { useParams } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Navibar from '../components/Navibar'
 import { Form, Button } from 'react-bootstrap'
 import SearchForm from '../components/SearchForm'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
+import { fetchMachine } from '../actions/machine'
+import { fetchRegion, fetchRegions } from '../actions/regions'
+import { fetchManufacturer } from '../actions/manufacturers'
 /*
 
 get the product with the given id
 
 */
-const ProductScreen = ({match}) => {
-   // let params = match.params
+const ProductScreen = (props) => {
+    let {id } = useParams()
+    const dispatch = useDispatch()
+    var machine = useSelector((state) => state.machine) || []
+    machine = machine.machines.find(obj => {
+        return obj._id = id
+    })
+    const [images, setImages] = useState(machine.images)
+    const desc = convertFromRaw(JSON.parse(machine.additionalDescription))
+    const editorState = EditorState.createWithContent(desc)
+
+    const manufacturer = useSelector((state) => state.manufacturers) || []
+    const regionState = useSelector(({
+        region: { regions }
+    }) => ({ regions }), shallowEqual)
+
+    const region = regionState.regions.find(obj => {
+        return obj._id == machine.region
+    })
+
+    const [formData, setFormData] = useState({
+        fullname: '',
+        phonenumber: '',
+        email: '',
+        companyname: '',
+        message: ''
+    })
+
+    const onChange = e => {
+        let val = e.target.value
+        setFormData({...formData, [e.target.name]: val})
+    } 
+
+    useEffect(() => {
+        // get machine types
+        // get brands
+        // get machines - used machines (2 - 4) and featured machines
+        dispatch(fetchMachine(id))
+        setImages(machine.images)
+        dispatch(fetchManufacturer(machine.manufacturer))
+        dispatch(fetchRegion(machine.region))
+        dispatch(fetchRegions())
+    }, [])
 
     return (
         <>
@@ -19,57 +67,44 @@ const ProductScreen = ({match}) => {
             <Navibar/>
         </header>
         <main className="p-5">
-            <div className="d-flex justify-content-center">
+            {/* <div className="d-flex justify-content-center">
                 <SearchForm/>
-            </div>
-            <h1 className="product-heading text-center">2018 Haas UMC-750 5- Axis CNC Vertical Machining Center</h1>
+            </div> */}
+            <h1 className="product-heading text-center">{machine.name}</h1>
             <div className="d-flex mt-5" >
                 {/* Start of machine images */}
                 <div className="image-gallery">
                     <Carousel showThumbs={true}>
-                        <div>
-                            <img className="image-gallery-img" src="https://via.placeholder.com/350" alt="machine"/>
+                        {images.map((img, i) => {
+                            return  <div key={i}>
+                            <img className="image-gallery-img" src={img} alt="machine"/>
                         </div>
-                        <div>
-                            <img className="image-gallery-img" src="https://via.placeholder.com/350" alt="machine"/>
-                        </div>
-                        <div>
-                            <img className="image-gallery-img" src="https://via.placeholder.com/350" alt="machine"/>
-                        </div>
-                        <div>
-                            <img className="image-gallery-img" src="https://via.placeholder.com/350" alt="machine"/>
-                            <p className="legend">My Classic Still 3</p>
-                        </div>
+                        })}
                     </Carousel>
                 </div>
                 {/* End of machine images */}
                 {/* Start of machine info */}
                 <div className="ml-5">
-                    <h3>Product Description</h3>
-                    <p>
-                        Sed ut perspiciatis unde omnis iste natus error sit 
-                        voluptatem accusantium doloremque laudantium, totam 
-                        rem aperiam, eaque ipsa quae ab illo inventore veritatis 
-                        et quasi architecto beatae vitae dicta sunt explicabo. 
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur 
-                        aut odit aut fugit, sed quia consequuntur magni dolores 
-                        eos qui ratione voluptatem sequi nesciunt.
-                    </p>
+                    <div>
+                        <h3>Product Description</h3>
+                        <Editor editorState={editorState} readOnly={true}/>
+                    </div>
+                   
                     <h3>Pricing</h3>
                     {/* Call for Pricing State */}
                     <p>
                         <a href="tel:416-951-9505" className="call-for-pricing">
                             Call for Pricing
+                            <br></br>416-951-9505
                         </a>
                     </p>
                     
                     {/* End of Call for Price State */}
                     {/* Pricing Available State */}
                     <h3 className="mb-4">
-                        <span className="product-price">$70,000</span>
-                        <br/>
-                        <span className="product-price">$70,000 </span>
-                        <span className="product-price-new">$100,000</span>
+                        Price:
+                        <span className="product-price">${machine.price.used} </span>
+                        <span className="product-price-new">${machine.price.new}</span>
                         {/* {priceUsed !== undefined &&<span>Price: ${priceUsed} </span>} 
                         <span className={ onSale ? 'price-before'  :  ''}>
                             {!onSale && priceNew !== undefined && 
@@ -86,24 +121,24 @@ const ProductScreen = ({match}) => {
                             <div className="container">
                                <span className="row mt-2 mb-2">
                                     <span className="col product-info-left">Brand</span>
-                                    <span className="col">Haas</span>
+                                    <span className="col">{manufacturer.manufacturer.name}</span>
                                 </span>
                                 <span className="row mt-2 mb-2">
                                     <span className="col product-info-left">Model</span>
-                                    <span className="col">UMC-730</span>
+                                    <span className="col">{machine.model}</span>
                                 </span>
                                 <span className="row mt-2 mb-2">
                                     <span className="col product-info-left">Year</span>
-                                    <span className="col">2017</span>
+                                    <span className="col">{machine.year}</span>
                                 </span>
                                 <span className="row mt-2 mb-2">
                                     <span className="col product-info-left">Condition</span>
-                                    <span className="col">New</span>
-                                    {/* <span className="col">Rating Here</span> */}
+                                    <span className="col">{machine.condition.description}</span>
+                                    <span className="col">{machine.condition.rating} Stars</span>
                                 </span>
                                 <span className="row mt-2 mb-2">
                                     <span className="col product-info-left">Region</span>
-                                    <span className="col">East Canada</span>
+                                    <span className="col">{region.name}</span>
                                     {/* <span className="col">Rating Here</span> */}
                                 </span>
                             </div>

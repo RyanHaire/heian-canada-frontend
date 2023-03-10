@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import Input from '../Input'
 import { Editor} from "react-draft-wysiwyg"; 
-import {EditorState, convertToRaw } from 'draft-js'
+import {EditorState, convertFromRaw, convertToRaw} from 'draft-js'
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { fetchMachine, updateMachine } from '../../actions/machine'
 import { fetchRegions } from '../../actions/regions'
@@ -59,7 +59,7 @@ const AdminEditMachine = (props) => {
     const manufacturerState = useSelector((state) => state.manufacturers) || []
 
     const [uploadedImages, setUploadedImages] = useState(0)
-    const [editorState, setEditorState] = useState(() => EditorState.createEmpty())
+    const [editorState, setEditorState] = useState()
     const [inputList, setInputList] = useState([])
     const [formData, setFormData] = useState({
         manufacturer: '',
@@ -85,9 +85,9 @@ const AdminEditMachine = (props) => {
             dispatch(fetchMachineTypes())
     
             dispatch(fetchManufacturers())
-
+            
             setFormData({
-                manufacturer: manufacturerState.manufacturers.manufacturer,
+                manufacturer: manufacturerState.manufacturers.filter((m, i) => m._id == machineState.machine.manufacturer)[0].name,
                 model: machineState.machine.model,
                 year: machineState.machine.year,
                 voltage: machineState.machine.voltage,
@@ -100,8 +100,7 @@ const AdminEditMachine = (props) => {
                 isUsed: machineState.machine.isUsed
             })
 
-            console.log(machineTypeState.machineTypes.find(x => x._id === machineState.machine.type).name)
-            console.log("machineType = " + machineType)
+            setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(machineState.machine.additionalDescription))))
 
         } catch(error) {
             console.log(error)
@@ -110,8 +109,6 @@ const AdminEditMachine = (props) => {
     }, [dispatch])
 
     
-
-
     const onChange = e => {
         let val = e.target.value
         if(e.target.type === 'checkbox') {
@@ -244,15 +241,17 @@ const AdminEditMachine = (props) => {
                 },
                 id)
         )
+
         setEditorState(EditorState.createEmpty())
         console.log(formData)
-        // console.log(uploadedImages)
+        window.location.reload()
     }
 
     return (
         <>
-        {machineState.isPending === true || machineState.machine === null ? "Loading..." : 
+        {machineState.machine === null ? "Loading..." : 
         <CreateMachineForm>
+            <h1>Remember to refresh a couple times after updating.</h1>
             {console.log(machineState)}
             <InputContainer>
                 <Label htmlFor="images">Images</Label>
@@ -266,8 +265,8 @@ const AdminEditMachine = (props) => {
                 <SelectField id="machine-manufacturer" name="manufacturer" value={manufacturer} onChange={e => onChange(e)}>
                     <option value=""></option>
                     {manufacturerState.manufacturers !== [] ?  
-                        manufacturerState.manufacturers.map((manufacturer, i) => {
-                            return (<option key={i} selected={manufacturer._id === machineState.machine.manufacturer} value={manufacturer.name}>{manufacturer.name}</option>)
+                        manufacturerState.manufacturers.map((m, i) => {
+                            return (<option key={i} value={m.name}>{m.name}</option>)
                     }) : 
                         <option value="No Manufacturers Types Available">No Manufacturers Types Available</option>
                     }
@@ -306,8 +305,8 @@ const AdminEditMachine = (props) => {
                 <Label htmlFor="region">Region</Label>
                 <SelectField id="region" name="region" value={region} onChange={e => onChange(e)}>
                     <option value=""></option>
-                    {regionState.regions !== [] ? regionState.regions.map((region, i) => {
-                        return (<option key={i} value={region.name}>{region.name}</option>)
+                    {regionState.regions !== [] ? regionState.regions.map((r, i) => {
+                        return (<option key={i} value={r.name}>{r.name}</option>)
                     }) : <option value="No Regions Available">No Regions Available</option>}
                 </SelectField> 
             </InputContainer>

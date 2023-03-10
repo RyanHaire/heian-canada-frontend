@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import {
     Container,
     Row,
@@ -18,15 +19,73 @@ import Product from '../components/Product'
 import { useSelector, useDispatch } from 'react-redux'
 import NewMachineryLogo from '../assets/drilling.png'
 import UsedMachineryLogo from '../assets/laser-cutting-machine.png'
+import { fetchMachines } from '../actions/machine'
 
 const HomeScreen = () => {
     const dispatch = useDispatch()
-    
+    const machineState = useSelector((state) => state.machine) || []
+
+    const [count, setCount] = useState(0)
+    const [count2, setCount2] = useState(0)
+    const [newCount, setNewCount] = useState(0)
+    const [successMsg, setSuccessMsg] = useState("")
+    const [colorSet, setColorSet] = useState("green")
+    const [formData, setFormData] = useState({
+        fullname: '',
+        phonenumber: '',
+        email: '',
+        companyname: '',
+        message: ''
+    })
+
+    const onChange = e => {
+        let val = e.target.value
+        setFormData({...formData, [e.target.name]: val})
+    } 
+
     useEffect(() => {
         // get machine types
         // get brands
         // get machines - used machines (2 - 4) and featured machines
+        dispatch(fetchMachines())
+        machineState.machines.map((machine, i) => {
+            if(!machine.isUsed) 
+                setNewCount(newCount + 1)
+        })
+        setCount(0)
+        setCount2(0)
+        console.log(machineState)
     }, [])
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault()
+       
+        axios.post("http://localhost:5000/api/contact", formData)
+        .then(res => {
+            setSuccessMsg("Successfully sent email! We will get back to you as soon as possible.")
+        })
+        .catch(err => {
+            console.log(err)
+            setSuccessMsg("Could not send email! Retry again in a bit.")
+        })
+
+        
+        setFormData({
+            fullname: '',
+            phonenumber: '',
+            email: '',
+            companyname: '',
+            message: ''
+        })
+    }
+
+    const {
+        fullname,
+        phonenumber,
+        companyname,
+        email,
+        message
+    } = formData
 
     return (
         <>
@@ -49,7 +108,7 @@ const HomeScreen = () => {
             </header>
 
             <main>
-                <Container style={{marginTop: '10rem'}}>
+                {/* <Container style={{marginTop: '10rem'}}>
                     <Row>
                         <Col sm={12} md={12} lg={6} className="mb-4">
                             <Card className="pt-3">
@@ -114,119 +173,62 @@ const HomeScreen = () => {
                             </Card>
                         </Col>
                     </Row>
-                </Container>
+                </Container> */}
+
+                {/* newCount == 0 ? <p></p> : 
+                    <Container style={{marginTop: '10rem'}}>
+                    
+                        <Carousel2 cols={2} showDots loop mobileBreakpoint={[{
+                                breakpoint: 800,
+                                cols: 1,
+                                rows: 1
+                        }]}>
+                        {
+                                machineState.machines.map((machine, i) => {
+                                    
+                                    if(!machine.isUsed && count < 4) {
+                                        setCount(count + 1)
+                                        return  <Carousel2.Item key={i}>
+                                                    <Product 
+                                                        img={machine.images[0]} 
+                                                        title={machine.name}
+                                                        priceNew={"$" + machine.price.new} onSale={false}
+                                                    />
+                                                </Carousel2.Item>
+                                    } 
+                                    return null;
+                                
+                                })
+                        }
+                        </Carousel2>
+                        
+                    </Container>
+                */}
 
                 <Container style={{marginTop: '10rem'}}>
-                    <h2 className="text-no-transform">Featured Machines</h2>
+                    {/* <h2 className="text-no-transform">Machines On Sale</h2> */}
                     <Carousel2 cols={2} showDots loop mobileBreakpoint={[{
                             breakpoint: 800,
                             cols: 1,
                             rows: 1
                     }]}>
-                        <Carousel2.Item key={1}>
-                            <Product 
-                                img="https://via.placeholder.com/350" 
-                                title="Heian HR Twin Table" 
-                                priceNew="55,000" onSale={false}
-                            />
-                        </Carousel2.Item>
-                        <Carousel2.Item key={2}>
-                            <Product 
-                                    img="https://via.placeholder.com/350" 
-                                    title="Heian HR Twin Table" 
-                                    priceNew="55,000" onSale={false}
-                                />
-                        </Carousel2.Item>
-                        <Carousel2.Item key={3}>
-                            <Product 
-                                    img="https://via.placeholder.com/350" 
-                                    title="Heian HR Twin Table" 
-                                    priceNew="55,000" onSale={false}
-                                />
-                        </Carousel2.Item>
-                        <Carousel2.Item key={4}>
-                            <Product 
-                                    img="https://via.placeholder.com/350" 
-                                    title="Heian HR Twin Table" 
-                                    priceNew="55,000" onSale={false}
-                                />
-                        </Carousel2.Item>
-                        {/*
-                        {products.map((val, i) => (
-                            <Carousel.Item key={i}>
-                            <Card>
-                                <img src={val.img} />
-                                <div>
-                                <Title>{val.title}</Title>
-                                <span>{val.specialPrice}</span>
-                                <span>{val.oriPrice}</span>
-                                </div>
-                                <Mask />
-                            </Card>
-                            </Carousel.Item>
-                         ))}
-                        */ }
-                    </Carousel2>
-                </Container>
-
-                <Container style={{marginTop: '10rem'}}>
-                    <h2 className="text-no-transform">Machines On Sale</h2>
-                    <Carousel2 cols={2} showDots loop mobileBreakpoint={[{
-                            breakpoint: 800,
-                            cols: 1,
-                            rows: 1
-                    }]}>
-                        <Carousel2.Item key={1}>
-                            <Product 
-                                img="https://via.placeholder.com/350" 
-                                title="Heian HR Twin Table" 
-                                priceNew="75,000" 
-                                priceUsed="55,000"
-                                onSale={true}
-                            />
-                        </Carousel2.Item>
-                        <Carousel2.Item key={2}>
-                        <Product 
-                                img="https://via.placeholder.com/350" 
-                                title="Heian HR Twin Table" 
-                                priceNew="75,000" 
-                                priceUsed="55,000"
-                                onSale={true}
-                            />
-                        </Carousel2.Item>
-                        <Carousel2.Item key={3}>
-                        <Product 
-                                img="https://via.placeholder.com/350" 
-                                title="Heian HR Twin Table" 
-                                priceNew="75,000" 
-                                priceUsed="55,000"
-                                onSale={true}
-                            />
-                        </Carousel2.Item>
-                        <Carousel2.Item key={4}>
-                        <Product 
-                                img="https://via.placeholder.com/350" 
-                                title="Heian HR Twin Table" 
-                                priceNew="75,000" 
-                                priceUsed="55,000"
-                                onSale={true}
-                            />
-                        </Carousel2.Item>
-                        {/*
-                        {products.map((val, i) => (
-                            <Carousel.Item key={i}>
-                            <Card>
-                                <img src={val.img} />
-                                <div>
-                                <Title>{val.title}</Title>
-                                <span>{val.specialPrice}</span>
-                                <span>{val.oriPrice}</span>
-                                </div>
-                                <Mask />
-                            </Card>
-                            </Carousel.Item>
-                         ))}
-                        */ }
+                       {
+                            machineState.machines.map((machine, i) => {
+                                
+                                    return  <Carousel2.Item key={i}>
+                                                <Product 
+                                                    img={machine.images[0]} 
+                                                    title={machine.name}
+                                                    priceNew={"$" + machine.price.new} 
+                                                    priceUsed={machine.price.used}
+                                                    onSale={true}
+                                                    id={machine._id}
+                                                />
+                                            </Carousel2.Item>
+                                
+                               
+                            })
+                       }
                     </Carousel2>
                 </Container>
                 <Container style={{marginTop: '10rem'}}>
@@ -240,32 +242,33 @@ const HomeScreen = () => {
                         <Col sm={12} md={6} lg={6}>
                             <Card className="p-5">
                                 <Container>
+                                    <p style={{color: colorSet}}>{successMsg}</p>
                                     <Form>
                                         <Form.Group>
                                             <Form.Label>Full Name</Form.Label>
-                                            <Form.Control type="text" placeholder="Full Name"/>
+                                            <Form.Control type="text" name="fullname" value={fullname} placeholder="Full Name" onChange={(e) => onChange(e)}/>
                                         </Form.Group>
                                         <Form.Group>
                                             <Form.Label>Email Address</Form.Label>
-                                            <Form.Control type="email" placeholder="Full Name"/>
+                                            <Form.Control type="email" name="email" value={email} placeholder="Email" onChange={(e) => onChange(e)}/>
                                             <Form.Text className="text-muted">
                                             We'll never share your email with anyone else.
                                             </Form.Text>
                                         </Form.Group>
                                         <Form.Group>
                                             <Form.Label>Company Name</Form.Label>
-                                            <Form.Control type="text" placeholder="Full Name"/>
+                                            <Form.Control type="text" name="companyname" value={companyname} placeholder="Company Name"onChange={(e) => onChange(e)} />
                                         </Form.Group>
                                         <Form.Group>
                                             <Form.Label>Phone Number</Form.Label>
-                                            <Form.Control type="text" placeholder="Full Name"/>
+                                            <Form.Control type="text" name="phonenumber" value={phonenumber} placeholder="Phone Number" onChange={(e) => onChange(e)}/>
                                         </Form.Group>
                                         <Form.Group controlId="exampleForm.ControlTextarea1">
                                             <Form.Label>Message</Form.Label>
-                                            <Form.Control as="textarea" rows={8} />
+                                            <Form.Control name="message" value={message} onChange={(e) => onChange(e)} as="textarea" rows={8} />
                                         </Form.Group>
                                         <Form.Group>
-                                            <Button style={{ width: '100%'}} className="mt-1 btn-primary" type="submit">Send Message</Button>
+                                            <Button style={{ width: '100%'}} className="mt-1 btn-primary" type="submit" onClick={(e) => handleFormSubmit(e)}>Send Message</Button>
                                         </Form.Group>
                                     </Form>
                                 </Container>

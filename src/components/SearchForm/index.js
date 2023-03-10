@@ -1,11 +1,16 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 
-const SearchForm = () => {
+const SearchForm = ({value, onChange}) => {
+
+    const handleClick = e => {
+        window.location.reload()
+    }
     return (
         <Form className="d-flex align-items-center mb-4 w-75">
             <i className="fas fa-search mr-2" />
-            <Form.Control type="text" placeholder="Search for a product..."></Form.Control>
+            <input type="text" value={value} placeholder="Search for a product..." onChange={ e => onChange(e)}></input>
+            <button onClick={e => handleClick(e)}>Search</button>
         </Form>
     )
 }

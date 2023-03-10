@@ -1,3 +1,4 @@
+
 // helper classes
 
 .mt-20 {
@@ -81,6 +82,9 @@ justify-content: center;
 align-items: center;
 }
 
+.flex-wrap {
+    flex-wrap: wrap;
+}
 .img-cover {
 object-fit: cover;
 }

@@ -5,6 +5,7 @@ import {
     Nav,
     Image
 } from 'react-bootstrap'
+import Logo from '../../assets/heian-logo.svg'
 import { LinkContainer } from 'react-router-bootstrap'
 import './index.css'
 import { loadUser, logout } from '../../actions/auth'
@@ -16,7 +17,7 @@ const Navibar = () => {
         <Navbar style={{width: '100%'}} bg="light" expand="lg" collapseOnSelect>
             <LinkContainer to="/">
                 <Navbar.Brand href="#home" className="ml-3">
-                    <Image className="logo" src={window.location.origin + '/images/heian-logo.svg'}/>
+                    <Image className="logo" src={Logo}/>
                     <span className="bold">&nbsp;&nbsp;Heian Canada Inc.</span>
                 </Navbar.Brand>
             </LinkContainer>

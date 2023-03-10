@@ -1,6 +1,7 @@
 import React from 'react'
 import { Nav, Image, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import WhiteLogo from '../../assets/heian-logo-white.svg'
 import './index.css'
 
 const Footer = () => {
@@ -25,7 +26,7 @@ const Footer = () => {
                          <Nav.Link className="footer-link fs-normal text-no-transform">Contact</Nav.Link>
                      </LinkContainer>
                      <LinkContainer to="/">
-                        <Image className="footer-link mt-3 footer-logo" src={window.location.origin + '/images/heian-logo-white.svg'}/>
+                        <Image className="footer-link mt-3 footer-logo" src={WhiteLogo}/>
                      </LinkContainer>
                  </Nav>
                  
@@ -38,7 +39,7 @@ const Footer = () => {
             </div>
         </div>
         <div className="text-center p-4">
-             Copright &copy; Heian Canada Inc.
+             Copyright &copy; Heian Canada Inc.
         </div>
      </footer>
     )

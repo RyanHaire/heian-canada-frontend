@@ -157,6 +157,32 @@ export const fetchMachine = id => async dispatch => {
     }
 }
 
+// action to get machine by id
+export const searchMachines = value => async dispatch => {
+    try {
+        dispatch({
+            type: FETCH_MACHINES_PENDING
+        })
+
+        const res = await axios.get(`http://localhost:5000/api/search/${value}`)
+        //console.log("res.data is " + JSON.stringify(res.data))
+        dispatch({
+            type: FETCH_MACHINES_SUCCESS,
+            payload: res.data
+        })
+    } catch (error) {
+        const errors = error.response.data.errors
+        
+        if(errors) {
+            errors.forEach(err => dispatch(setAlert(err.msg, 'danger')))
+        }
+
+        dispatch({
+            type: FETCH_MACHINES_FAIL
+        })
+    }
+}
+
 // action to create a machine
 export const createMachine = formData => async dispatch => {
     console.log(formData)
@@ -214,15 +240,17 @@ export const updateMachine = (formData, id) => async dispatch => {
 
         dispatch(setAlert('Machine Updated!', 'success'))
     } catch (error) {
-        const errors = error.response.data.errors
+        console.log(error)
+        // const errors = error.response.data.errors
         
-        if(errors) {
-            errors.forEach(err => dispatch(setAlert(err.msg, 'danger')))
-        }
+        
+        // if(errors) {
+        //     errors.forEach(err => dispatch(setAlert(err.msg, 'danger')))
+        // }
 
-        dispatch({
-            type: UPDATE_MACHINE_FAIL
-        })
+        // dispatch({
+        //     type: UPDATE_MACHINE_FAIL
+        // })
     }
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Input from './Input'
+import axios from 'axios'
 
 const ContactForm = styled.div`
     width: 400px;
@@ -34,6 +35,7 @@ const Contact = () => {
         reason: '',
         message: ''
     })
+    const [successMsg, setSuccessMsg] = useState("")
 
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
 
@@ -42,23 +44,48 @@ const Contact = () => {
         lastName,
         email,
         company,
+        phone,
         location,
         reason,
         message
     } = formData
 
 
-    const handleSubmit = () => {
-        console.log(reason)
+    const handleFormSubmit = (e) => {
+        e.preventDefault()
+       
+        axios.post("http://localhost:5000/api/contact", formData)
+        .then(res => {
+            setSuccessMsg("Successfully sent email! We will get back to you as soon as possible.")
+        })
+        .catch(err => {
+            console.log(err)
+            setSuccessMsg("Could not send email! Retry again in a bit.")
+        })
+
+        
+        setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            reason: '',
+            company: '',
+            location: '',
+            message: ''
+        })
     }
 
     return (
         <ContactForm>
-            <Input type="text" label="First Name" placeholder="First Name" value={firstName} handleChange={(e) => onChange(e)}/>
-            <Input type="text" label="Last Name" placeholder="Last Name" value={lastName} handleChange={(e) => onChange(e)}/>
-            <Input type="text" label="Email" placeholder="Email" value={email} handleChange={(e) => onChange(e)}/>
-            <Input type="text" label="Company" placeholder="Company" value={company} handleChange={(e) => onChange(e)}/>
-            <Input type="text" label="Location" placeholder="Location" value={location} handleChange={(e) => onChange(e)}/>
+            <p style={{color: 'green'}}>{successMsg}</p>
+            <Input type="text" label="First Name" name="firstName" placeholder="First Name" value={firstName} handleChange={(e) => onChange(e)}/>
+            <Input type="text" label="Last Name" name="lastName" placeholder="Last Name" value={lastName} handleChange={(e) => onChange(e)}/>
+            <Input type="text" label="Email" name="email" placeholder="Email" value={email} handleChange={(e) => onChange(e)}/>
+            <Input type="text" label="Phone Number" name="phone" placeholder="Phone Number" value={phone} handleChange={(e) => onChange(e)}/>
+            <Input type="text" label="Company" name="company" placeholder="Company" value={company} handleChange={(e) => onChange(e)}/>
+            <Input type="text" label="Location" name="location" placeholder="Location" value={location} handleChange={(e) => onChange(e)}/>
+
             <div >
                 <label htmlFor="reason">Reason For Contacting</label>
                 <Select id="reason" className="d-block mb-10" name="reason" value={reason ? reason: ''} onChange={(e) => onChange(e)}>
@@ -72,7 +99,7 @@ const Contact = () => {
                 <label htmlFor="message">Message</label>
                 <textarea id="message" rows="10" name="message" value={message} onChange={(e) => onChange(e)}></textarea>
             </div>
-            <button className="btn btn-primary w-100" onClick={() => handleSubmit()}>Send</button>
+            <button className="btn btn-primary w-100" onClick={(e) => handleFormSubmit(e)}>Send</button>
         </ContactForm>
     )
 }

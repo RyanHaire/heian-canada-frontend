@@ -61,10 +61,6 @@
     text-decoration: line-through;
 }
 
-.machine-link {
-    color: var(--black);
-}
-
 .machine-link:hover {
     text-decoration: none;
 }

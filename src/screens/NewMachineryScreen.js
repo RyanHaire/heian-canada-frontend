@@ -6,13 +6,12 @@ import SearchForm from '../components/SearchForm'
 import FilterForm from '../components/FilterForm'
 import ProductList from '../components/ProductList'
 
+
 const NewMachineryScreen = () => {
     const [shouldHideBanner, setShouldHideBanner] = useState(false)
     const [scrollTop, setScrollTop] = useState(0)
-    
 
     useEffect(() => {
-
         const onScroll = e => {
             setScrollTop(e.target.documentElement.scrollTop)
             setShouldHideBanner(e.target.documentElement.scrollTop > scrollTop)
@@ -37,10 +36,10 @@ const NewMachineryScreen = () => {
                 </div>
             </header>
             <main className="d-flex">
-                <CategoryNav />
-                <div className="product-listing-rs d-flex flex-column align-items-center">
-                    <SearchForm/>
-                    <FilterForm/>
+                {/* <CategoryNav /> */}
+                <div className="d-flex">
+                    {/* <SearchForm/> */}
+                    {/* <FilterForm/> */}
                     <ProductList isUsed={false}/>
                 </div>
             </main>

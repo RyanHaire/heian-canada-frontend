@@ -6,7 +6,7 @@ import './index.css'
 
 const Product = ({img, title, priceNew, priceUsed, onSale, className, id}) => {
     return (
-        <Link to={`${priceNew ? `/new-machine/${id}` : `/used-machine/${id}`}`} className="machine-link">
+        <Link to={`${priceNew ? `/new-machinery/${id}` : `/used-machinery/${id}`}`} className="machine-link">
             <div className={className + " multiple-machine sale-machine"}>
                 <div className="multiple-machine-img-wrap">
                     <Image src={img}

@@ -63,6 +63,7 @@ export const fetchRegion = id => async dispatch => {
             type: FETCH_REGION_SUCCESS,
             payload: res.data
         })
+
     } catch (error) {
         const errors = error.response.data.errors
         

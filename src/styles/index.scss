@@ -23,6 +23,7 @@ h2,h3,h4,h5,h6 {
 
 .primary-color {
   background-color: var(--primary-color) !important;
+  
 }
 
 .btn-primary {
@@ -33,7 +34,7 @@ h2,h3,h4,h5,h6 {
 /* Index and Global Styles */
 
 .jumbotron {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('http://localhost:3000/images/hero-image-machine.svg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('http://localhost:3001/images/hero-image-machine.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -164,6 +165,10 @@ ul.thumbs.animated {
   width: 400px;
 }
 
+.machine-link {
+  color: var(--primary-color) !important;
+   width: 20rem;
+}
 /* Media Queries */
 /* mobile screens */
 @media only screen and (max-width: 600px) {

@@ -30,7 +30,7 @@ import AdminDashboardCreateManufacturer from './screens/AdminDashboardCreateManu
 import AdminDashboardEditManufacturer from './screens/AdminDashboardEditManufacturer'
 import AdminDashboardManufacturers from './screens/AdminDashboardManufacturers'
 
-
+import useGaTracker from './useGaTracker'
 import { loadUser } from './actions/auth'
 import setAuthToken  from './utility/setAuthToken'
 
@@ -39,6 +39,8 @@ if(localStorage.token) {
 }
 
 const App = () => {
+
+  useGaTracker()
   // const dispatch = useDispatch()
 
   // useEffect(() => {
@@ -46,33 +48,32 @@ const App = () => {
   // }, [dispatch])
 
   return (
-      <Router>
-          <Routes>
-            <Route exact path="/" element={<HomeScreen/>}/>
-            <Route exact path="/admin/login" element={<LoginScreen/>}/>
-            <Route exact path="/admin/dashboard" element={<AdminDashboardScreen/>}/>
-            <Route exact path="/admin/dashboard/machines" element={<AdminDashboardMachines/>}/>
-            <Route exact path="/admin/dashboard/machines/create" element={<AdminDashboardCreateMachine/>}/>
-            <Route exact path="/admin/dashboard/machines/edit/:id" element={<AdminDashboardEditMachine/>}/>
-            <Route exact path="/admin/dashboard/machinetypes" element={<AdminDashboardMachineTypes/>}/>
-            <Route exact path="/admin/dashboard/machinetypes/create" element={<AdminDashboardCreateMachineType/>}/>
-            <Route exact path="/admin/dashboard/machinetypes/edit/:id" element={ props => (<AdminDashboardEditMachineType {...props}/>)}/>
-            <Route exact path="/admin/dashboard/regions" element={<AdminDashboardRegions/>}/>
-            <Route exact path="/admin/dashboard/regions/create" element={<AdminDashboardCreateRegion/>}/>
-            <Route exact path="/admin/dashboard/regions/edit/:id" element={ props => (<AdminDashboardEditRegion {...props}/>)}/>
-            <Route exact path="/admin/dashboard/manufacturers" element={<AdminDashboardManufacturers/>}/>
-            <Route exact path="/admin/dashboard/manufacturers/create" element={<AdminDashboardCreateManufacturer/>}/>
-            <Route exact path="/admin/dashboard/manufacturers/edit/:id" element={ props => (<AdminDashboardEditManufacturer {...props}/>)}/>
-            <Route exact path="/new-machinery" element={<NewMachineryScreen/>}/>
-            <Route exact path="/new-machinery" element={<NewMachineryScreen/>}/>
-            <Route exact path="/new-machinery/:id" element={<ProductScreen/>}/>
-            <Route exact path="/used-machinery" element={<UsedMachineryScreen/>}/>
-            <Route exact path="/used-machinery/:id" element={<ProductScreen/>}/>
-            <Route exact path="/services" element={<ServicesScreen/>}/>
-            <Route exact path="/contact" element={<ContactScreen/>}/>
-            <Route element={<NotFound/>} />
-          </Routes>
-        </Router>
+    <Routes>
+      <Route exact path="/" element={<HomeScreen/>}/>
+      <Route exact path="/admin/login" element={<LoginScreen/>}/>
+      <Route exact path="/admin/dashboard" element={<AdminDashboardScreen/>}/>
+      <Route exact path="/admin/dashboard/machines" element={<AdminDashboardMachines/>}/>
+      <Route exact path="/admin/dashboard/machines/create" element={<AdminDashboardCreateMachine/>}/>
+      <Route exact path="/admin/dashboard/machines/edit/:id" element={<AdminDashboardEditMachine/>}/>
+      <Route exact path="/admin/dashboard/machinetypes" element={<AdminDashboardMachineTypes/>}/>
+      <Route exact path="/admin/dashboard/machinetypes/create" element={<AdminDashboardCreateMachineType/>}/>
+      <Route exact path="/admin/dashboard/machinetypes/edit/:id" element={ props => (<AdminDashboardEditMachineType {...props}/>)}/>
+      <Route exact path="/admin/dashboard/regions" element={<AdminDashboardRegions/>}/>
+      <Route exact path="/admin/dashboard/regions/create" element={<AdminDashboardCreateRegion/>}/>
+      <Route exact path="/admin/dashboard/regions/edit/:id" element={ props => (<AdminDashboardEditRegion {...props}/>)}/>
+      <Route exact path="/admin/dashboard/manufacturers" element={<AdminDashboardManufacturers/>}/>
+      <Route exact path="/admin/dashboard/manufacturers/create" element={<AdminDashboardCreateManufacturer/>}/>
+      <Route exact path="/admin/dashboard/manufacturers/edit/:id" element={ props => (<AdminDashboardEditManufacturer {...props}/>)}/>
+      <Route exact path="/new-machinery" element={<NewMachineryScreen/>}/>
+      <Route exact path="/new-machinery/:id" element={<ProductScreen/>}/>
+      <Route exact path="/new-machinery/type/:type" element={<NewMachineryScreen/>}/>
+      <Route path="/used-machinery/type/:type" element={<UsedMachineryScreen/>}/>
+      <Route path="/used-machinery" element={<UsedMachineryScreen/>}/>
+      <Route path="/used-machinery/:id" element={ props => <ProductScreen {...props}/>}/>
+      <Route exact path="/services" element={<ServicesScreen/>}/>
+      <Route exact path="/contact" element={<ContactScreen/>}/>
+      <Route element={<NotFound/>} />
+    </Routes>
   );
 }
 
